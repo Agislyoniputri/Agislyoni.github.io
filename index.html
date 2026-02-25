@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Latihan 1 - Program Fibonacci</title>
+
+  <style>
+    :root{
+      --max: 980px;
+      --radius: 16px;
+      --border: #e7e8ee;
+      --bg: #f6f7fb;
+      --shadow: 0 10px 26px rgba(0,0,0,.10);
+      --shadowModal: 0 22px 70px rgba(0,0,0,.28);
+      --blue: #2563eb;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color:#111;
+    }
+
+    .wrap{ max-width: var(--max); margin: 28px auto; padding: 0 16px; }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    h2{ margin:0 0 8px; font-size:20px; }
+    p{ margin:0 0 14px; line-height:1.55; color:#333; }
+
+    .row{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin: 10px 0 16px;
+    }
+
+    .btn{
+      border:0;
+      background: var(--blue);
+      color:#fff;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .note{ font-size:12px; color:#666; }
+
+    .figure{
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .figure img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height: 520px;
+      object-fit: contain;
+    }
+
+    /* Modal */
+    .backdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.60);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 14px;
+      z-index:9999;
+    }
+
+    .modal{
+      width: min(1100px, 100%);
+      max-height: 92vh;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadowModal);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .modalHeader{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid #ececf2;
+    }
+    .modalHeader strong{ font-size:14px; }
+
+    .x{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor:pointer;
+      font-weight: 800;
+    }
+
+    .modalBody{
+      padding: 12px;
+      height: 78vh;
+      min-height: 520px;
+    }
+
+    iframe{
+      width:100%;
+      height:100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    @media (max-width: 480px){
+      .card{ padding: 14px; }
+      h2{ font-size: 18px; }
+      .btn{ width:100%; justify-content:center; }
+      .modalBody{ min-height: 480px; height: 78vh; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <section class="card">
+      <h2>Latihan 1 - Program Fibonacci</h2>
+
+      <p>
+        Program ini menghitung bilangan <b>Fibonacci ke-20</b> menggunakan bahasa Dart.
+        Gambar di bawah adalah hasil output program.
+      </p>
+
+      <div class="row">
+        <button class="btn" id="openBtn" type="button">Lihat Source Code di DartPad</button>
+        <span class="note">Popup bisa ditutup dengan klik area gelap atau tekan ESC.</span>
+      </div>
+
+      <div class="figure">
+        <img src="output.png" alt="Hasil output program Fibonacci">
+      </div>
+    </section>
+  </main>
+
+  <!-- Popup -->
+  <div class="backdrop" id="backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="DartPad Source Code">
+      <div class="modalHeader">
+        <strong>DartPad - Source Code</strong>
+        <button class="x" id="closeBtn" type="button" aria-label="Tutup">✕</button>
+      </div>
+
+      <div class="modalBody">
+        <iframe
+          title="DartPad Embed"
+          src="https://dartpad.dev/embed-inline.html?id=GIST_ID_KAMU&split=70&run=true"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const backdrop = document.getElementById("backdrop");
+    const openBtn = document.getElementById("openBtn");
+    const closeBtn = document.getElementById("closeBtn");
+
+    function openModal(){
+      backdrop.style.display = "flex";
+      backdrop.setAttribute("aria-hidden","false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal(){
+      backdrop.style.display = "none";
+      backdrop.setAttribute("aria-hidden","true");
+      document.body.style.overflow = "";
+    }
+
+    openBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+
+    // Klik area gelap -> tutup
+    backdrop.addEventListener("click", (e) => {
+      if (e.target === backdrop) closeModal();
+    });
+
+    // ESC -> tutup
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && backdrop.style.display === "flex") closeModal();
+    });
+  </script>
+</body>
+</html>
