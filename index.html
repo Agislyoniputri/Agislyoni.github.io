@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Latihan 1 • Fibonacci DartPad</title>
+
+  <style>
+    :root{
+      --bg0:#0b1220;
+      --bg1:#070a12;
+      --panel: rgba(18, 24, 40, .72);
+      --panel2: rgba(18, 24, 40, .52);
+      --border: rgba(255,255,255,.10);
+      --text: #e9efff;
+      --muted:#a8b3d2;
+      --blue:#3b82f6;
+      --cyan:#22d3ee;
+      --radius: 18px;
+      --shadow: 0 22px 70px rgba(0,0,0,.55);
+      --max: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 520px at 18% -10%, rgba(59,130,246,.25), transparent 55%),
+        radial-gradient(900px 520px at 92% 10%, rgba(34,211,238,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* grid halus */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity:.06;
+      pointer-events:none;
+    }
+
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 20px 14px 36px;
+    }
+
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin: 10px 0 16px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      letter-spacing:.06em;
+    }
+    .logo{
+      width:36px; height:36px; border-radius: 12px;
+      background: linear-gradient(180deg, rgba(59,130,246,.35), rgba(34,211,238,.25));
+      border:1px solid rgba(255,255,255,.10);
+      display:grid; place-items:center;
+      box-shadow: 0 12px 28px rgba(0,0,0,.35);
+    }
+    .pill{
+      font-size:12px;
+      color: rgba(255,255,255,.82);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space:nowrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .card{
+      background: var(--panel);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .cardHead{
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .cardHead strong{
+      font-size: 13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color: rgba(233,239,255,.92);
+    }
+    .cardBody{ padding: 14px; }
+
+    .title{
+      margin: 6px 0 10px;
+      font-size: clamp(20px, 4.8vw, 30px);
+      font-weight: 950;
+      line-height:1.15;
+    }
+    .title span{
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .desc{
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height:1.7;
+      font-size: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 12px 12px;
+    }
+
+    .mini{
+      display:grid;
+      gap:8px;
+      margin-top: 10px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .miniRow{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      font-size: 13px;
+      color: rgba(233,239,255,.88);
+    }
+    .miniRow span{ color: rgba(168,179,210,.9); }
+
+    .btn{
+      border:0;
+      cursor:pointer;
+      font-weight: 900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      padding: 12px 14px;
+      border-radius: 14px;
+      color: #071021;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      box-shadow: 0 14px 28px rgba(59,130,246,.18), 0 14px 28px rgba(34,211,238,.12);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .btn:active{ transform: translateY(1px); }
+
+    .hint{
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,.62);
+    }
+
+    .imgFrame{
+      background: rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      overflow:hidden;
+    }
+    .imgFrame img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height: 560px;
+      object-fit: contain;
+      background: rgba(0,0,0,.25);
+    }
+    .cap{
+      padding: 10px 12px;
+      font-size: 12px;
+      color: rgba(255,255,255,.62);
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    /* Desktop: 2 kolom */
+    @media (min-width: 900px){
+      .grid{ grid-template-columns: 1fr 1.15fr; }
+      .cardBody{ padding: 16px; }
+    }
+
+    /* ===== Modal ===== */
+    .backdrop{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.72);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 14px;
+      z-index:9999;
+    }
+    .modal{
+      width: min(1200px, 100%);
+      max-height: 92vh;
+      background: rgba(18,24,40,.92);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px;
+      overflow:hidden;
+      box-shadow: 0 30px 100px rgba(0,0,0,.65);
+      display:flex;
+      flex-direction:column;
+    }
+    .modalHeader{
+      padding: 12px 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(90deg, rgba(59,130,246,.12), rgba(34,211,238,.10));
+    }
+    .modalHeader strong{
+      font-size: 13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color: rgba(233,239,255,.92);
+    }
+    .close{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.92);
+      padding: 8px 10px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight: 900;
+    }
+    .modalBody{
+      padding: 12px;
+      height: 78vh;
+      min-height: 520px;
+    }
+    iframe{
+      width:100%;
+      height:100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background:#000;
+    }
+    @media (max-width: 420px){
+      .modalBody{ min-height: 480px; }
+      .btn{ width:100%; justify-content:center; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">◆</div>
+        <div>Latihan 1 • <span style="color:rgba(233,239,255,.75)">DartPad</span></div>
+      </div>
+      <div class="pill">FIBONACCI(20) • OUTPUT CAPTURE • POPUP DARTPAD</div>
+    </div>
+
+    <div class="grid">
+      <!-- Kiri: info + tombol -->
+      <section class="card">
+        <div class="cardHead">
+          <strong>Deskripsi Program</strong>
+          <span class="pill">main.dart</span>
+        </div>
+        <div class="cardBody">
+          <div class="title"><span>Program Fibonacci</span> (Dart)</div>
+
+          <div class="desc">
+            Program menghitung <b>bilangan Fibonacci ke-20</b> menggunakan fungsi rekursif,
+            lalu mencetak nama:
+            <b>Agis Lyoni Putri</b>.
+            Tombol di bawah akan membuka <b>DartPad</b> berisi source code program.
+          </div>
+
+          <button class="btn" id="openBtn" type="button">▶ Buka DartPad</button>
+          <div class="hint">Tutup popup: klik area gelap / tombol X / tekan ESC</div>
+
+          <div class="mini" aria-label="Ringkasan output">
+            <div class="miniRow"><span>Input (n)</span><b>20</b></div>
+            <div class="miniRow"><span>Output</span><b>fibonacci(20) = 6765</b></div>
+            <div class="miniRow"><span>Print nama</span><b>Agis Lyoni Putri</b></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Kanan: gambar output -->
+      <section class="card">
+        <div class="cardHead">
+          <strong>Output (Gambar)</strong>
+          <span class="pill">output.png</span>
+        </div>
+        <div class="cardBody">
+          <div class="imgFrame">
+            <img src="output.png" alt="Capture output DartPad">
+            <div class="cap">Pastikan file <b>output.png</b> ada di folder yang sama dengan <b>index.html</b>.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="backdrop" id="backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="DartPad Source Code">
+      <div class="modalHeader">
+        <strong>DartPad • Source Code</strong>
+        <button class="close" id="closeBtn" type="button" aria-label="Tutup">✕</button>
+      </div>
+      <div class="modalBody">
+        <iframe
+          title="DartPad Embed"
+          src="https://dartpad.dev/embed-inline.html?id=5e42dbb7f59632d53c3f76b17134d3ca&split=70&run=true"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const backdrop = document.getElementById("backdrop");
+    const openBtn = document.getElementById("openBtn");
+    const closeBtn = document.getElementById("closeBtn");
+
+    function openModal(){
+      backdrop.style.display = "flex";
+      backdrop.setAttribute("aria-hidden","false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeModal(){
+      backdrop.style.display = "none";
+      backdrop.setAttribute("aria-hidden","true");
+      document.body.style.overflow = "";
+    }
+
+    openBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+
+    backdrop.addEventListener("click", (e) => {
+      if (e.target === backdrop) closeModal();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && backdrop.style.display === "flex") closeModal();
+    });
+  </script>
+</body>
+</html>
