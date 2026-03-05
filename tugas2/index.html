@@ -320,14 +320,20 @@
 class Car {
   String? model;
   String? color;
-
   void start() {
     print('Car started!');
   }
-
   void stop() {
     print('Car stopped!');
   }
+}
+void main() {
+  Car myCar = Car();
+  
+  myCar.model = "Sedan";
+  myCar.color = "Merah";
+  myCar.start();
+  myCar.stop();
 }</code></pre>
       </div>
 
@@ -345,14 +351,19 @@ class Car {
 // Nim    : 251410022
 // Kelas  : SI2A
 
+class Car {
+  String? model; 
+  String? color; 
+}
+
 void main() {
   Car myCar = Car();
   
-  myCar.model = "Sedan";
+  myCar.model = "Sedan"; 
   myCar.color = "Merah";
 
-  myCar.start();
-  myCar.stop();
+  print(myCar.model); 
+  print(myCar.color);
 }</code></pre>
       </div>
 
@@ -370,14 +381,21 @@ void main() {
 // Kelas  : SI2A
 
 class Car {
-  String? model;
-  String? color;
+  String model; 
+  String color;
 
   Car(this.model, this.color);
 
   void start() {
-    print('Engine Online: $model');
+    print('Engine Online: $model'); 
   }
+}
+
+void main() {
+  Car myCar = Car("Sedan", "Merah");
+
+  myCar.start(); 
+  print(myCar.color); 
 }</code></pre>
       </div>
 
@@ -395,15 +413,23 @@ class Car {
 // Kelas  : SI2A
 
 class Mahasiswa {
-  String nama;
-  String nim;
-  double ipk;
+  String nama; 
+  String nim; 
+  double ipk;  
 
   Mahasiswa(this.nama, this.nim, this.ipk);
 
   void tampilkanData() {
-    print('NAMA : $nama | NIM : $nim | IPK : $ipk');
+    print('Nama : $nama');
+    print('NIM  : $nim');
+    print('IPK  : $ipk');
   }
+}
+
+void main() {
+  Mahasiswa mhs1 = Mahasiswa("Agis Lyoni Putri", "251410022", 3.87);
+  
+  mhs1.tampilkanData();
 }</code></pre>
       </div>
 
@@ -422,13 +448,22 @@ class Mahasiswa {
 // Kelas  : SI2A
 
 class Person {
-  String _name;
-  int age;
+  String _name; 
+  int age;    
 
   Person(this._name, this.age);
 
   void setName(String name) => _name = name;
+  
   String getName() => _name;
+}
+
+void main() {
+  Person person = Person("Putri Lyoni Agis", 20);
+
+  print(person.age); 
+  person.setName("Agis Lyoni Putri");
+  print(person.getName()); 
 }</code></pre>
       </div>
 
@@ -446,9 +481,15 @@ class Person {
 // Kelas  : SI2A
 
 class Product {
-  String nama;
+  String nama; 
   Product(this.nama);
-}</code></pre>
+}
+
+void main() {
+  Product produk1 = Product("Laptop Gaming");
+  print(produk1.nama); 
+}
+</code></pre>
       </div>
 
       <button onclick="openModal('https://dartpad.dev/?id=6ae11454792e37b829205f1b4cd4df76')">Run Program</button>
@@ -465,9 +506,9 @@ class Product {
 // Kelas  : SI2A
 
 class Produk {
-  final String id, nama;
-  final double harga;
-  final int stok;
+  final String id, nama; 
+  final double harga; 
+  final int stok;   
   final String kategori;
 
   Produk({
@@ -477,6 +518,33 @@ class Produk {
     this.stok = 0,
     this.kategori = 'Umum',
   });
+}
+
+void main() {
+  Produk laptop = Produk(
+    id: "P001",
+    nama: "Laptop Gaming",
+    harga: 15000000,
+    stok: 15,
+    kategori: "Elektronik",
+  );
+
+  Produk smartphone = Produk(
+    id: "P002",
+    nama: "Smartphone Flagship",
+    harga: 12000000,
+    stok: 25,
+  );
+
+  Produk kamera = Produk(
+    id: "P003",
+    nama: "Kamera Mirrorless",
+    harga: 20000000,
+  );
+
+  print(laptop.nama); 
+  print(smartphone.nama); 
+  print(kamera.nama); 
 }</code></pre>
       </div>
 
@@ -502,15 +570,11 @@ class Produk {
 
 class Hewan {
   String nama;
-
   Hewan(this.nama);
-
   void bersuara() {
     print('$nama sedang bersuara...');
-    print('Sound Protocol: [DATA_SOUND_GENERATED]');
   }
 }
-
 void main() {
   var myPet = Hewan('Kucing');
   print('Nama Hewan: ${myPet.nama}');
