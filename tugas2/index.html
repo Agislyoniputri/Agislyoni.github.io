@@ -500,20 +500,21 @@ class Produk {
 // Nim    : 251410022
 // Kelas  : SI2A
 
-class Kelinci {
-  late String nama;
-  late String warna;
+class Hewan {
+  String nama;
 
-  Kelinci(this.nama, this.warna);
+  Hewan(this.nama);
 
-  void Makan() {
-    print("Kelinci $nama itu $warna sedang makan wortel.");
+  void bersuara() {
+    print('$nama sedang bersuara...');
+    print('Sound Protocol: [DATA_SOUND_GENERATED]');
   }
 }
 
 void main() {
-  var b = Kelinci("Merpati", "Putih");
-  b.Makan();
+  var myPet = Hewan('Kucing');
+  print('Nama Hewan: ${myPet.nama}');
+  myPet.bersuara();
 }</code></pre>
       </div>
 
