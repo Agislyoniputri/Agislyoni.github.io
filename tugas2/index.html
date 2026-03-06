@@ -290,9 +290,8 @@
     <section>
       <h2>01. Pengertian OOP</h2>
       <p>
-        <span class="highlight">Object Oriented Programming (OOP)</span> adalah paradigma pemrograman yang berorientasi
-        pada objek. Pendekatan ini membuat program lebih terstruktur, modular, serta mudah dikembangkan karena setiap
-        bagian program dibangun dalam bentuk objek dunia nyata.
+        <span class="highlight">Object Oriented Programming (OOP)</span> Object Oriented Programming (OOP) adalah paradigma pemrograman yang berorientasi pada objek, dimana program dibuat menggunakan class dan objek.
+Dalam OOP terdapat beberapa konsep utama seperti Encapsulation, Inheritance, Polymorphism, dan Abstraction yang membantu membuat program lebih terstruktur, modular, dan mudah dikembangkan.
       </p>
     </section>
 
@@ -308,8 +307,8 @@
 
     <section>
       <h2>03. Class Sederhana (Car)</h2>
-      <p>Class adalah blueprint untuk membuat objek. Pada contoh ini, class Car memiliki atribut model dan color serta
-        method start() dan stop().</p>
+      <p>Pada contoh program di bawah ini terdapat class Car yang memiliki dua atribut yaitu model dan color yang digunakan untuk menyimpan data mobil.
+Selain itu terdapat dua method yaitu start() dan stop() yang berfungsi untuk menjalankan dan menghentikan mobil.</p>
 
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -342,7 +341,9 @@ void main() {
 
     <section>
       <h2>04. Object Instantiation</h2>
-      <p>Proses menciptakan objek konkret dari class Car yang telah didefinisikan sebelumnya menggunakan fungsi main().
+      <p>Object Instantiation adalah proses membuat objek dari sebuah class.
+Pada contoh berikut dibuat sebuah objek bernama myCar dari class Car menggunakan perintah Car myCar = Car();.
+Setelah objek dibuat, atribut model dan color diisi dengan nilai "Sedan" dan "Merah".
       </p>
 
       <div class="code-container">
@@ -372,7 +373,7 @@ void main() {
 
     <section>
       <h2>05. Constructor</h2>
-      <p>Constructor memudahkan kita mengisi nilai atribut langsung saat objek diciptakan (inisialisasi).</p>
+      <p>Constructor adalah metode khusus dalam sebuah class yang digunakan untuk menginisialisasi nilai atribut saat objek dibuat. Pada contoh ini, constructor Car(this.model, this.color) digunakan untuk langsung memberikan nilai pada atribut model dan color ketika objek myCar dibuat.</p>
 
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -404,7 +405,7 @@ void main() {
 
     <section>
       <h2>06. Practice: Mahasiswa</h2>
-      <p>Implementasi objek Mahasiswa untuk mengelola data akademik secara terstruktur.</p>
+      <p>Program ini membuat class Mahasiswa yang memiliki atribut nama, nim, dan ipk. Class ini juga memiliki constructor untuk mengisi data saat objek dibuat dan method tampilkanData() yang digunakan untuk menampilkan data mahasiswa ke layar.</p>
 
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -438,7 +439,7 @@ void main() {
 
     <section>
       <h2>07. Encapsulation</h2>
-      <p>Teknik keamanan data dengan menyembunyikan akses langsung ke variabel internal menggunakan prefix underscore.
+      <p>Encapsulation adalah konsep OOP untuk menyembunyikan data di dalam class agar tidak bisa diakses langsung dari luar. Akses ke data tersebut dilakukan melalui method seperti getter dan setter untuk menjaga keamanan dan kontrol terhadap data.
       </p>
 
       <div class="code-container">
@@ -472,7 +473,7 @@ void main() {
 
     <section>
       <h2>08. This Keyword</h2>
-      <p>Rujukan eksplisit ke instance class saat ini untuk menghindari kebingungan nama antara field dan parameter.</p>
+      <p>this adalah keyword yang digunakan untuk merujuk pada instance (objek) dari class saat ini. Biasanya digunakan di dalam constructor atau method untuk mengakses field atau method milik class tersebut.</p>
 
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -497,7 +498,7 @@ void main() {
 
     <section>
       <h2>09. Product Class</h2>
-      <p>Penggunaan Named Parameters dan Required untuk menciptakan objek yang lebih deskriptif dan aman.</p>
+      <p>Class Produk menggunakan named parameters pada constructor sehingga setiap nilai dapat diberikan dengan nama parameternya. Beberapa parameter menggunakan required agar wajib diisi saat membuat objek, sedangkan parameter lain memiliki nilai default.</p>
 
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -559,7 +560,7 @@ void main() {
 
     <section>
       <h2>11. Bonus: Kelinci Class</h2>
-      <p>Contoh tambahan penggunaan class untuk memodelkan makhluk hidup seperti kelinci dengan perilaku makan wortel.
+      <p>Kelas Hewan pada kode di bawah merupakan contoh dasar pemrograman berorientasi objek yang memiliki atribut sebagai data dan metode sebagai fungsi.
       </p>
 
       <div class="code-container">
