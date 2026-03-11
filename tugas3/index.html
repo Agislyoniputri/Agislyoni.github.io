@@ -745,65 +745,6 @@ class User {
   String _username;
   String _password;
   String _email;
-  
-  User(this._username, this._password, this._email);
-  
-  // Getter
-  String get username => _username;
-  String get password => _password;
-  String get email => _email;
-  
-  // Setter dengan validasi
-  set username(String value) {
-    if (value.length >= 5) {
-      _username = value;
-    } else {
-      print('Username minimal 5 karakter');
-    }
-  }
-  
-  set password(String value) {
-    if (value.length >= 8) {
-      _password = value;
-    } else {
-      print('Password minimal 8 karakter');
-    }
-  }
-  
-  set email(String value) {
-    if (value.contains('@')) {
-      _email = value;
-    } else {
-      print('Email harus mengandung @');
-    }
-  }
-}</code></pre>
-        </div>
-
-            <div class="dartpad-links">
-                <a href="#" onclick="openModal('https://dartpad.dev/?id=14ee1166250b201f8d2d48cad4261c3d&run=true'); return false;"
-                    class="dartpad-btn">
-                    <span>▶</span> run
-                </a>
-            </div>
-        </section>
-
-    <!-- Slide 13: Sistem Login -->
-    <section>
-      <h2>🔑 Sistem Login dengan Ganti Password</h2>
-
-        <p>Logika autentikasi dan prosedur perubahan password</p>
-        
-        <div class="code-container">
-            <div class="code-header">🔐 USER DENGAN LOGIN & GANTI PASSWORD</div>
-            <pre><code>// Nama   : Agis Lyoni Putri
-// Nim    : 251410022
-// Kelas  : Si2A
-
-class User {
-  String _username;
-  String _password;
-  String _email;
 
   User(this._username, this._password, this._email);
 
@@ -845,13 +786,72 @@ void main() {
   user.password = 'manis1127';
   user.email = 'AgisLyoniPutri@gmail.com';
   user.info();
+}</code></pre>
+        </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=78232cc513a4fa9b21459fc9f6ef97e7&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+    <!-- Slide 13: Sistem Login -->
+    <section>
+      <h2>🔑 Sistem Login dengan Ganti Password</h2>
+
+        <p>Logika autentikasi dan prosedur perubahan password</p>
+        
+        <div class="code-container">
+            <div class="code-header">🔐 USER DENGAN LOGIN & GANTI PASSWORD</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : Si2A
+
+class User {
+  String _username;
+  String _password;
+
+  User(this._username, this._password);
+  String get username => _username;
+
+  bool login(String username, String password) {
+    return _username == username && _password == password;
+  }
+
+  void gantiPassword(String lama, String baru) {
+    if (_password == lama) {
+      if (baru.length >= 8) {
+        _password = baru;
+        print('Password berhasil diubah.');
+      } else {
+        print('Gagal: Password baru minimal 8 karakter.');
+      }
+    } else {
+      print('Gagal: Password lama tidak sesuai.');
+    }
+  }
 }
-      </code></pre>
+
+void main() {
+  print('--- Inisialisasi User ---');
+  final User user1 = User('admin_Agis', 'securePass1611');
+  
+  print('--- Uji Coba Login ---');
+  if (user1.login('admin_Agis', 'securePass1611')) {
+    print('Login Berhasil!');
+  }
+
+  print('\n--- Uji Coba Ganti Password ---');
+  user1.gantiPassword('securePass1611', 'newSecurePass2020');
+  user1.gantiPassword('wrongPass', 'anyPass'); // Gagal
+}</code></pre>
         </div>
 
 
             <div class="dartpad-links">
-                <a href="#" onclick="openModal('https://dartpad.dev/?id=60f2f0c6e55f4d490b19762716c3d90b&run=true'); return false;"
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=da2d2bb470231db4780e532e99e4ce7f&run=true'); return false;"
                     class="dartpad-btn">
                     <span>▶</span> run
                 </a>
@@ -877,33 +877,40 @@ void main() {
 class RekeningBank {
   String _nomorRekening;
   double _saldo;
-  
+
   RekeningBank(this._nomorRekening, this._saldo);
-  
-  void deposit(double jumlah) {
-    if (jumlah > 0) {
-      _saldo += jumlah;
-      print('Deposit berhasil. Saldo sekarang: $_saldo');
-    } else {
-      print('Jumlah deposit harus positif');
+
+  void deposit(double jml) {
+    if (jml > 0) {
+      _saldo += jml;
+      print('Deposit Rp $jml Berhasil.');
     }
   }
-  
-  void tarik(double jumlah) {
-    if (jumlah > 0 && jumlah <= _saldo) {
-      _saldo -= jumlah;
-      print('Penarikan berhasil. Saldo sekarang: $_saldo');
+
+  void tarik(double jml) {
+    if (jml > 0 && _saldo >= jml) {
+      _saldo -= jml;
+      print('Tarik Rp $jml Berhasil.');
     } else {
-      print('Saldo tidak cukup atau jumlah tidak valid');
+      print('Gagal: Saldo tidak cukup atau input tidak valid.');
     }
   }
-  
-  double cekSaldo() => _saldo;
+
+  void cekSaldo() {
+    print('Rekening: $_nomorRekening | Saldo: Rp $_saldo');
+  }
+}
+
+void main() {
+  var bank = RekeningBank('2514-10002', 2000000);
+  bank.cekSaldo();
+  bank.tarik(500000);
+  bank.cekSaldo();
 }</code></pre>
         </div>
 
             <div class="dartpad-links">
-                <a href="#" onclick="openModal('https://dartpad.dev/?id=60f2f0c6e55f4d490b19762716c3d90b&run=true'); return false;"
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=da5a5ed1f80ac8dc9d8e626c40b04fbb&run=true'); return false;"
                     class="dartpad-btn">
                     <span>▶</span> run
                 </a>
