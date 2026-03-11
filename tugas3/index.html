@@ -370,6 +370,9 @@ void main() {
 // Nim    : 251410022
 // Kelas  : SI2A
 
+
+import 'dart:convert';
+
 class Mobil {
   String? merk;
   int? tahun;
@@ -384,11 +387,12 @@ class Mobil {
   }
 
   // Named constructor dengan parameter
-  Mobil.dariJson(Map&lt;String, dynamic&gt; json) {
+  Mobil.dariJson(Map<String, dynamic> json) {
     merk = json['merk'];
     tahun = json['tahun'];
   }
 
+  // Override toString for better print output
   @override
   String toString() {
     return 'Mobil{merk: $merk, tahun: $tahun}';
@@ -396,19 +400,23 @@ class Mobil {
 }
 
 void main() {
-  // 1. Constructor default
+  print('--- Demonstrasi Class Mobil ---');
+
+  // 1. Menggunakan constructor default (parameterized constructor)
   var mobilA = Mobil('Honda', 2020);
-  print('Mobil A: $mobilA');
+  print('Mobil A (constructor default): $mobilA');
 
-  // 2. Named constructor .baru()
+  // 2. Menggunakan named constructor Mobil.baru()
   var mobilB = Mobil.baru();
-  print('Mobil B: $mobilB');
+  print('Mobil B (named constructor .baru): $mobilB');
 
-  // 3. Named constructor .dariJson()
+  // 3. Menggunakan named constructor Mobil.dariJson()
   String jsonString = '{"merk": "Suzuki", "tahun": 2021}';
-  Map&lt;String, dynamic&gt; jsonData = jsonDecode(jsonString);
+  Map<String, dynamic> jsonData = jsonDecode(jsonString);
   var mobilC = Mobil.dariJson(jsonData);
-  print('Mobil C: $mobilC');
+  print('Mobil C (named constructor .dariJson): $mobilC');
+
+  print('\n--- Akhir Demonstrasi ---');
 }</code></pre>
             </div>
 
@@ -432,6 +440,7 @@ void main() {
                 <pre><code>// Nama   : Agis Lyoni Putri
 // Nim    : 251410022
 // Kelas  : SI2A
+
 class Warna {
   final int r, g, b;
   const Warna(this.r, this.g, this.b);
@@ -444,17 +453,17 @@ class Warna {
 
 void main() {
   const merah = Warna(255, 0, 0);
-  const merahLagi = Warna(255, 0, 0); // instance yang sama di memory
+  const merahLagi = Warna(255, 0, 0); // Menggunakan instance yang sama di memory
 
   print(merah);
   print(merahLagi);
-  print(identical(merah, merahLagi)); // true (objek sama)
+  print('Apakah identik? ${identical(merah, merahLagi)}');
 }</code></pre>
             </div>
 
 
             <div class="dartpad-links">
-                <a href="#" onclick="openModal('https://dartpad.dev/?id=10a4bd0d76f23e57d8dc81354370e929&run=true'); return false;"
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=db8cd4b18a2fa1cae906dcb39aa17959&run=true'); return false;"
                     class="dartpad-btn">
                     <span>▶</span> run
                 </a>
@@ -472,30 +481,30 @@ void main() {
                 <pre><code>// Nama   : Agis Lyoni Putri
 // Nim    : 251410022
 // Kelas  : SI2A
+
 class Titik {
   final double x, y;
 
   Titik(double x, double y)
-      : x = x.abs(),
-        y = y.abs() {
-    print('Titik dibuat di ($x, $y)');
+    : x = x.abs(),
+      y = y.abs() {
+    print('Titik dibuat di (${this.x}, ${this.y})');
   }
 }
 
-void main() {
-  print('Titik dengan nilai positif:');
+void main(){
+  print('Membuat objek Titik pertama:');
   var titik1 = Titik(3.0, 4.0);
-  
-  print('\nTitik dengan nilai negatif:');
+  print('Titik 1: x = ${titik1.x}, y = ${titik1.y}');
+
+  print('\nMembuat objek Titik kedua dengan nilai negatif:');
   var titik2 = Titik(-5.0, 10.0);
-  
-  print('\nTitik dengan kedua nilai negatif:');
-  var titik3 = Titik(-1.5, -2.5);
+  print('Titik 2: x = ${titik2.x}, y = ${titik2.y}');
 }</code></pre>
             </div>
 
             <div class="dartpad-links">
-                <a href="#" onclick="openModal('https://dartpad.dev/?id=10a4bd0d76f23e57d8dc81354370e929&run=true'); return false;"
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=aaaa9b3dadb7596a83502c8b2118388d&run=true'); return false;"
                     class="dartpad-btn">
                     <span>▶</span> run
                 </a>
@@ -512,34 +521,34 @@ void main() {
             <pre><code>// Nama   : Agis Lyoni Putri
 // Nim    : 251410022
 // Kelas  : SI2A
+
 class Mahasiswa {
-  String nama;
-  String nim;
-  double ipk;
-  
-  // Constructor default
-  Mahasiswa(this.nama, this.nim, this.ipk);
-  
-  // Named constructor dariMap
-  Mahasiswa.dariMap(Map&lt;String, dynamic&gt; map) {
-    nama = map['nama'] ?? 'Tanpa Nama';
-    nim = map['nim'] ?? '000000';
-    ipk = map['ipk'] ?? 0.0;
+  String? nama;
+  String? nim;
+
+  Mahasiswa(this.nama, this.nim);
+
+  Mahasiswa.dariMap(Map<String, String> data) {
+    nama = data['nama'];
+    nim = data['nim'];
   }
-  
-  // Named constructor tanpaNama
-  Mahasiswa.tanpaNama(this.nim, this.ipk) {
-    nama = 'Tanpa Nama';
+
+  Mahasiswa.tanpaNama() {
+    nama = 'No Name';
+    nim = '000000';
   }
-  
-  void tampilkanData() {
-    print('Nama: $nama, NIM: $nim, IPK: $ipk');
-  }
+
+  void info() => print('Mahasiswa: $nama, NIM: $nim');
 }
 
 void main() {
-  var mhs1 = Mahasiswa("Agis Lyoni Putri", "251410022", 3.87);
-  mhs1.tampilkanData();
+  var m1 = Mahasiswa('Agis', '251410022');
+  var m2 = Mahasiswa.dariMap({'nama': 'Lyoni Putri', 'nim': '251410023'});
+  var m3 = Mahasiswa.tanpaNama();
+
+  m1.info();
+  m2.info();
+  m3.info();
 }</code></pre>
         </div>
 
@@ -554,7 +563,7 @@ void main() {
 
     <!-- Slide 7-8: Enkapsulasi & Private -->
         <section>
-          <h2>🔑 Sistem Login dengan Ganti Password</h2>
+          <h2>🔒 Enkapsulasi & Private</h2>
 
         <p>Enkapsulasi adalah konsep dalam pemrograman berorientasi objek yang digunakan untuk melindungi data agar
             tidak dapat diakses secara langsung dari luar class.</p>
@@ -570,23 +579,25 @@ void main() {
             <pre><code>// Nama   : Agis Lyoni Putri
 // Nim    : 251410022
 // Kelas  : SI2A
+
 class Person {
-  String _name;  // private
-  int age;       // public
-  
+  String _name; // Private: Hanya bisa diakses di file ini
+  int age;      // Public: Dapat diakses bebas
+
   Person(this._name, this.age);
+
+  void info() => print('Nama: $_name, Umur: $age');
 }
 
 void main() {
-  Person person = Person("Salma", 20);
-  print(person.age);     // ✅ bisa diakses
-  // print(person._name); // ❌ error karena private
+  var p = Person('Agis Lyoni Putri', 18);
+  p.info();
 }</code></pre>
         </div>
 
 
             <div class="dartpad-links">
-                <a href="#" onclick="openModal('https://dartpad.dev/?id=?id=60f2f0c6e55f4d490b19762716c3d90b&run=true'); return false;"
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=808f3b0c31cc667462506b1449015d99&run=true'); return false;"
                     class="dartpad-btn">
                     <span>▶</span> run
                 </a>
@@ -649,7 +660,7 @@ void main() {
 
 
             <div class="dartpad-links">
-                <a href="#" onclick="openModal('https://dartpad.dev/?id=?id=60f2f0c6e55f4d490b19762716c3d90b&run=true'); return false;"
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=?60f2f0c6e55f4d490b19762716c3d90b&run=true'); return false;"
                     class="dartpad-btn">
                     <span>▶</span> run
                 </a>
