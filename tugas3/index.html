@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 Konstruktor & Enkapsulasi - Agis Lyoni Putri 🌸</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #7a4a4a;
+            background: #fff0f3;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 30%, #ffcad4, transparent 40%),
+                radial-gradient(circle at 80% 70%, #f4acb7, transparent 40%),
+                radial-gradient(circle at 50% 50%, #fff0f3, transparent 60%);
+            z-index: -2;
+        }
+
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-image:
+                radial-gradient(2px 2px at 10% 10%, #ff8fab, transparent),
+                radial-gradient(3px 3px at 30% 50%, #ffb3c1, transparent),
+                radial-gradient(2px 2px at 70% 80%, #fb6f92, transparent),
+                radial-gradient(4px 4px at 90% 10%, #ff8fab, transparent);
+            background-size: 600px 600px;
+            animation: floatSparkles 60s linear infinite;
+        }
+
+        @keyframes floatSparkles {
+            from {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            to {
+                transform: translateY(-600px) rotate(10deg);
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 30px;
+        }
+
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: #fb6f92;
+            text-shadow: 2px 4px 10px rgba(251, 111, 146, 0.2);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #ff8fab;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            border-radius: 40px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 15px 35px rgba(255, 143, 171, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #fb6f92;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 6px;
+            background: #ff8fab;
+            border-radius: 10px;
+        }
+
+        p {
+            font-weight: 400;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #7a4a4a;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        ul li {
+            margin-bottom: 12px;
+            padding-left: 35px;
+            position: relative;
+            color: #7a4a4a;
+        }
+
+        ul li::before {
+            content: "🌸";
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .code-container {
+            margin: 30px 0;
+            background: #fff5f7;
+            border: 2px dashed #ffb3c1;
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: #ffe5ec;
+            padding: 12px 25px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #fb6f92;
+            border-bottom: 1px solid #ffb3c1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        pre {
+            padding: 25px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #d63384;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .dartpad-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0 10px;
+        }
+
+        .dartpad-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff8fab, #fb6f92);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(251, 111, 146, 0.3);
+            gap: 8px;
+        }
+
+        .dartpad-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(251, 111, 146, 0.5);
+            background: linear-gradient(135deg, #fb6f92, #ff8fab);
+        }
+
+        .dartpad-btn i {
+            font-size: 1.1rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            background: rgba(255, 240, 243, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 85%;
+            background: white;
+            border: 5px solid #ffc2d1;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 143, 171, 0.3);
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close {
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            font-size: 45px;
+            color: #fb6f92;
+            cursor: pointer;
+            z-index: 1001;
+            font-weight: 900;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #ff8fab;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            color: #fb6f92;
+            font-weight: 700;
+            background: #ffeef2;
+            padding: 0 5px;
+            border-radius: 5px;
+        }
+
+        .slide-info {
+            background: #ffeef2;
+            border-radius: 30px;
+            padding: 15px 25px;
+            margin-bottom: 20px;
+            border-left: 8px solid #fb6f92;
+        }
+
+        .output-example {
+            background: #f0d9e0;
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin-top: 15px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #831d42;
+            border-left: 5px solid #fb6f92;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sparkles"></div>
+
+    <header>
+        <h1>🌸 KONSTRUKTOR & ENKAPSULASI 🌸</h1>
+        <p>Agis Lyoni Putri | 251410022 | SI2A </p>
+    </header>
+
+    <div class="container">
+
+        <!-- Slide 1: Review Sesi 1 -->
+        <section>
+            <h2>🔁 Review OOP</h2>
+            <ul>
+                <li>OOP adalah paradigma berfokus pada objek</li>
+                <li>Kelas adalah blueprint, objek adalah instance</li>
+                <li>Constructor digunakan untuk inisialisasi objek</li>
+            </ul>
+
+            <div class="code-container">
+                <div class="code-header">📌 CONTOH: CLASS BUKU</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+class Buku {
+  String judul;
+  Buku(this.judul);
+}
+
+void main() {
+  var buku1 = Buku("Belajar Dart");
+  print(buku1.judul);
+}</code></pre>
+            </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=1b17cf50c5387915a7b3d44bd58d7fd4&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+        <!-- Slide 2: Jenis Constructor -->
+        <section>
+            <h2>🏗️ 5 Jenis Constructor</h2>
+            <ul>
+                <li><span class="highlight">Default Constructor:</span> className()</li>
+                <li><span class="highlight">Named Constructor:</span> className.name()</li>
+                <li><span class="highlight">Parameterized Constructor:</span> className(this.param)</li>
+                <li><span class="highlight">Constant Constructor:</span> const className()</li>
+                <li><span class="highlight">Factory Constructor:</span> (akan dibahas di sesi lanjut)</li>
+            </ul>
+        </section>
+
+        <!-- Mobil -->
+        <section>
+          <h2>🚗 Class Mobil dengan Named Constructor</h2>
+
+            <p>Named constructor adalah constructor yang memiliki nama tambahan, sehingga dalam satu class dapat
+                memiliki beberapa constructor dengan fungsi yang berbeda.</p>
+            
+            <div class="code-container">
+                <div class="code-header">📋 NAMED CONSTRUCTOR - LENGKAP</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Mobil {
+  String? merk;
+  int? tahun;
+
+  // Parameterized constructor
+  Mobil(this.merk, this.tahun);
+
+  // Named constructor
+  Mobil.baru() {
+    merk = 'Toyota';
+    tahun = 2023;
+  }
+
+  // Named constructor dengan parameter
+  Mobil.dariJson(Map&lt;String, dynamic&gt; json) {
+    merk = json['merk'];
+    tahun = json['tahun'];
+  }
+
+  @override
+  String toString() {
+    return 'Mobil{merk: $merk, tahun: $tahun}';
+  }
+}
+
+void main() {
+  // 1. Constructor default
+  var mobilA = Mobil('Honda', 2020);
+  print('Mobil A: $mobilA');
+
+  // 2. Named constructor .baru()
+  var mobilB = Mobil.baru();
+  print('Mobil B: $mobilB');
+
+  // 3. Named constructor .dariJson()
+  String jsonString = '{"merk": "Suzuki", "tahun": 2021}';
+  Map&lt;String, dynamic&gt; jsonData = jsonDecode(jsonString);
+  var mobilC = Mobil.dariJson(jsonData);
+  print('Mobil C: $mobilC');
+}</code></pre>
+            </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=4d29fcbb13d0371863e968978c6188c8&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+
+            </div>
+        </section>
+
+        <!--  - Warna -->
+        <section>
+            <h2>🎨 Constant Constructor (Immutable)</h2>
+            <p>Digunakan untuk objek yang tidak berubah. Semua field harus <span class="highlight">final</span>.
+                Menghemat memory untuk objek yang sama.</p>
+
+            <div class="code-container">
+                <div class="code-header">🎨 CLASS WARNA DENGAN CONST CONSTRUCTOR</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+class Warna {
+  final int r, g, b;
+  const Warna(this.r, this.g, this.b);
+
+  @override
+  String toString() {
+    return 'Warna(r: $r, g: $g, b: $b)';
+  }
+}
+
+void main() {
+  const merah = Warna(255, 0, 0);
+  const merahLagi = Warna(255, 0, 0); // instance yang sama di memory
+
+  print(merah);
+  print(merahLagi);
+  print(identical(merah, merahLagi)); // true (objek sama)
+}</code></pre>
+            </div>
+
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=10a4bd0d76f23e57d8dc81354370e929&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+        <!-- Slide 5: Initializer List - Titik -->
+        <section>
+            <h2>📍 Constructor dengan Initializer List</h2>
+            <p>Menginisialisasi field sebelum constructor body dieksekusi. Berguna untuk inisialisasi final field atau
+                validasi.</p>
+
+            <div class="code-container">
+                <div class="code-header">📍 CLASS TITIK DENGAN INITIALIZER LIST</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+class Titik {
+  final double x, y;
+
+  Titik(double x, double y)
+      : x = x.abs(),
+        y = y.abs() {
+    print('Titik dibuat di ($x, $y)');
+  }
+}
+
+void main() {
+  print('Titik dengan nilai positif:');
+  var titik1 = Titik(3.0, 4.0);
+  
+  print('\nTitik dengan nilai negatif:');
+  var titik2 = Titik(-5.0, 10.0);
+  
+  print('\nTitik dengan kedua nilai negatif:');
+  var titik3 = Titik(-1.5, -2.5);
+}</code></pre>
+            </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=10a4bd0d76f23e57d8dc81354370e929&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+    <!-- Slide 6: Praktik Mahasiswa -->
+        <section>
+        <h2>👨‍🎓 Class Mahasiswa dengan Multiple Constructor</h2>
+        <p>Latihan class mahasiswa</p>
+
+        <div class="code-container">
+            <div class="code-header">📝 MAHASISWA - MULTIPLE CONSTRUCTOR</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+class Mahasiswa {
+  String nama;
+  String nim;
+  double ipk;
+  
+  // Constructor default
+  Mahasiswa(this.nama, this.nim, this.ipk);
+  
+  // Named constructor dariMap
+  Mahasiswa.dariMap(Map&lt;String, dynamic&gt; map) {
+    nama = map['nama'] ?? 'Tanpa Nama';
+    nim = map['nim'] ?? '000000';
+    ipk = map['ipk'] ?? 0.0;
+  }
+  
+  // Named constructor tanpaNama
+  Mahasiswa.tanpaNama(this.nim, this.ipk) {
+    nama = 'Tanpa Nama';
+  }
+  
+  void tampilkanData() {
+    print('Nama: $nama, NIM: $nim, IPK: $ipk');
+  }
+}
+
+void main() {
+  var mhs1 = Mahasiswa("Agis Lyoni Putri", "251410022", 3.87);
+  mhs1.tampilkanData();
+}</code></pre>
+        </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=cac172d314b85c5c68d354d662959316&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+
+    <!-- Slide 7-8: Enkapsulasi & Private -->
+        <section>
+          <h2>🔑 Sistem Login dengan Ganti Password</h2>
+
+        <p>Enkapsulasi adalah konsep dalam pemrograman berorientasi objek yang digunakan untuk melindungi data agar
+            tidak dapat diakses secara langsung dari luar class.</p>
+
+        <p>Dengan enkapsulasi, data hanya bisa diakses melalui method tertentu sehingga lebih aman dan terkontrol.</p>
+
+        <p>Di Dart, enkapsulasi dilakukan dengan menambahkan underscore (_) di depan nama variabel untuk menjadikannya
+            private.</p>
+        
+
+        <div class="code-container">
+            <div class="code-header">👤 CLASS PERSON DENGAN PRIVATE FIELD</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+class Person {
+  String _name;  // private
+  int age;       // public
+  
+  Person(this._name, this.age);
+}
+
+void main() {
+  Person person = Person("Salma", 20);
+  print(person.age);     // ✅ bisa diakses
+  // print(person._name); // ❌ error karena private
+}</code></pre>
+        </div>
+
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=?id=60f2f0c6e55f4d490b19762716c3d90b&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+    <!-- Slide 9: Getter dan setter-->
+    <section>
+        <h2>📤 Getter</h2>
+        <p>Getter adalah method yang digunakan untuk mengambil nilai dari variabel private.</p>
+        <h2>📤 Setter</h2>
+        <p>Setter adalah method yang digunakan untuk mengubah nilai variabel private dengan aturan tertentu.</p>
+
+
+        <div class="code-container">
+            <div class="code-header">🔍 Getter dan setter</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Person {
+  String _name;
+  int age;
+  Person(this._name, this.age);
+  
+  // GETTER (Slide 9)
+  // 1. Menggunakan Arrow Syntax
+  String get getName1 => _name;
+  
+  // 2. Menggunakan Block Syntax
+  String get getName2 {
+    return _name;
+  }
+
+  // SETTER (Slide 10)
+  // 1. Menggunakan Keyword 'set'
+  set setName1(String name) {
+    _name = name;
+  }
+
+  // 2. Menggunakan Method Approach
+  void setNameManual(String name) {
+    _name = name;
+  }
+}
+
+void main() {
+  Person p = Person("Agis", 18);
+  print('Umur Awal: ${p.age}');
+  
+  // Test Setters
+  p.setName1 = 'Lyoni Putri';
+  p.setNameManual('Agis Lyoni Putri');
+
+  // Test Getters
+  print('Hasil Getter 1: ${p.getName1}');
+  print('Hasil Getter 2: ${p.getName2}');
+}</code></pre>
+        </div>
+
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=?id=60f2f0c6e55f4d490b19762716c3d90b&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+
+    <!-- Slide 11: Getter & Setter dengan Validasi - Produk -->
+    <section>
+        <h2>📦 Class Produk dengan Validasi</h2>
+
+        <div class="code-container">
+            <div class="code-header">🛒 PRODUK - GETTER SETTER VALIDASI</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Produk {
+  String _nama;
+  double _harga;
+  
+  Produk(this._nama, this._harga);
+  
+  // Getter
+  String get nama => _nama;
+  double get harga => _harga;
+  
+  // Setter dengan validasi
+  set nama(String value) {
+    if (value.length >= 3) {
+      _nama = value;
+    } else {
+      print('Gagal: Nama minimal 3 karakter.');
+    }
+  }
+  
+  set harga(double value) {
+    if (value > 0) {
+      _harga = value;
+    } else {
+      print('Gagal: Harga harus lebih dari 0.');
+    }
+  }
+}
+
+void main() {
+  var produk1 = Produk('Monitor Samsung', 3500.0);
+  print('Awal: ${produk1.nama} - Rp${produk1.harga}');
+  
+  // Update valid
+  produk1.nama = 'Keyboard Mekanik';
+  produk1.harga = 1200.0;
+  print('Setelah update valid: ${produk1.nama} - Rp${produk1.harga}');
+  
+  // Update tidak valid
+  produk1.nama = 'TV';      // gagal ( < 3 karakter)
+  produk1.harga = -100.0;   // gagal ( <= 0)
+  print('Setelah update gagal: ${produk1.nama} - Rp${produk1.harga}');
+}</code></pre>
+        </div>
+
+        <div class="dartpad-links">
+            <a href="#" onclick="openModal('https://dartpad.dev/?id=14ee1166250b201f8d2d48cad4261c3d&run=true'); return false;"
+                class="dartpad-btn">
+                <span>▶</span> run
+            </a>
+        </div>
+    </section>
+
+    <!-- Slide 12: Praktik User dengan Validasi -->
+    <section>
+        <h2>👤 Class User dengan Validasi</h2>
+        <p>Field private: _username, _password, _email. Setter dengan validasi.</p>
+
+        <div class="code-container">
+            <div class="code-header">🔐 USER DENGAN VALIDASI LENGKAP</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class User {
+  String _username;
+  String _password;
+  String _email;
+  
+  User(this._username, this._password, this._email);
+  
+  // Getter
+  String get username => _username;
+  String get password => _password;
+  String get email => _email;
+  
+  // Setter dengan validasi
+  set username(String value) {
+    if (value.length >= 5) {
+      _username = value;
+    } else {
+      print('Username minimal 5 karakter');
+    }
+  }
+  
+  set password(String value) {
+    if (value.length >= 8) {
+      _password = value;
+    } else {
+      print('Password minimal 8 karakter');
+    }
+  }
+  
+  set email(String value) {
+    if (value.contains('@')) {
+      _email = value;
+    } else {
+      print('Email harus mengandung @');
+    }
+  }
+}</code></pre>
+        </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=14ee1166250b201f8d2d48cad4261c3d&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+    <!-- Slide 13: Sistem Login -->
+    <section>
+      <h2>🔑 Sistem Login dengan Ganti Password</h2>
+
+        <p>Logika autentikasi dan prosedur perubahan password</p>
+        
+        <div class="code-container">
+            <div class="code-header">🔐 USER DENGAN LOGIN & GANTI PASSWORD</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : Si2A
+
+class User {
+  String _username;
+  String _password;
+  String _email;
+
+  User(this._username, this._password, this._email);
+
+  // Getter untuk semua field
+  String get username => _username;
+  String get email => _email;
+
+  // Setter dengan validasi
+  set username(String v) {
+    if (v.length >= 5) {
+      _username = v;
+    } else {
+      print('Username min 5 karakter');
+    }
+  }
+
+  set password(String v) {
+    if (v.length >= 8) {
+      _password = v;
+    } else {
+      print('Password min 8 karakter');
+    }
+  }
+
+  set email(String v) {
+    if (v.contains('@')) {
+      _email = v;
+    } else {
+      print('Format email salah (Harus @)');
+    }
+  }
+
+  void info() => print('User: $_username, Pass: $_password, Email: $_email');
+}
+
+void main() {
+  var user = User('Agis', '1611', 'admin.com');
+  user.username = 'AgisLyoniPutri';
+  user.password = 'manis1127';
+  user.email = 'AgisLyoniPutri@gmail.com';
+  user.info();
+}
+      </code></pre>
+        </div>
+
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=60f2f0c6e55f4d490b19762716c3d90b&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+    <!-- Slide 14: Ringkasan & Latihan -->
+    <section>
+        <h2>🏦 Latihan: RekeningBank</h2>
+        <p>Buat kelas RekeningBank dengan:</p>
+        <ul>
+            <li>Field private: _nomorRekening, _saldo</li>
+            <li>Method: deposit(), tarik(), cekSaldo()</li>
+            <li>Validasi: saldo tidak bisa negatif</li>
+        </ul>
+
+        <div class="code-container">
+            <div class="code-header">💰 TEMPLATE REKENINGBANK</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class RekeningBank {
+  String _nomorRekening;
+  double _saldo;
+  
+  RekeningBank(this._nomorRekening, this._saldo);
+  
+  void deposit(double jumlah) {
+    if (jumlah > 0) {
+      _saldo += jumlah;
+      print('Deposit berhasil. Saldo sekarang: $_saldo');
+    } else {
+      print('Jumlah deposit harus positif');
+    }
+  }
+  
+  void tarik(double jumlah) {
+    if (jumlah > 0 && jumlah <= _saldo) {
+      _saldo -= jumlah;
+      print('Penarikan berhasil. Saldo sekarang: $_saldo');
+    } else {
+      print('Saldo tidak cukup atau jumlah tidak valid');
+    }
+  }
+  
+  double cekSaldo() => _saldo;
+}</code></pre>
+        </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=60f2f0c6e55f4d490b19762716c3d90b&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+        <!-- Slide 15: Penutup -->
+        <section>
+            <h2>📝 Ringkasan</h2>
+            <ul>
+                <li>Dart memiliki berbagai jenis constructor</li>
+                <li>Enkapsulasi melindungi data dengan private field (_)</li>
+                <li>Getter & setter memberikan kontrol akses yang aman</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <footer>
+        🌸 AGIS LYONI PUTRI - 251410022 - SI2A 🌸
+    </footer>
+
+        <!-- MODAL -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <iframe id="dartFrame" src=""></iframe>
+            </div>
+        </div>
+
+        <script>
+            // Reveal Animations
+            const sections = document.querySelectorAll("section");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(sec => observer.observe(sec));
+
+            // Modal Logic
+            function openModal(link) {
+                document.getElementById("modal").style.display = "block";
+                document.getElementById("dartFrame").src = link;
+                document.body.style.overflow = "hidden";
+            }
+
+            function closeModal() {
+                document.getElementById("modal").style.display = "none";
+                document.getElementById("dartFrame").src = "";
+                document.body.style.overflow = "auto";
+            }
+
+            window.onclick = function (e) {
+                if (e.target == document.getElementById("modal")) closeModal();
+            }
+
+            // Security Protocol
+            document.addEventListener('contextmenu', e => e.preventDefault());
+            document.onkeydown = function (e) {
+                if (e.keyCode == 123) return false;
+                if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) return false;
+                if (e.ctrlKey && e.keyCode == 85) return false;
+                if (e.ctrlKey && e.keyCode == 83) return false;
+            };
+            document.onselectstart = function () { return false; };
+        </script>
+</body>
+
+</html>
