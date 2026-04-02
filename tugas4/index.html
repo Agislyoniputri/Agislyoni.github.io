@@ -428,17 +428,17 @@ void main() {
 class Kendaraan {}
 
 class Mobil extends Kendaraan {
-  void klakson() => print('Tin!');
+  void klakson() {
+    print('Tin!');
+  }
 }
 
 void main() {
   Kendaraan k = Mobil();
 
   if (k is Mobil) {
-    (k as Mobil).klakson();
+    k.klakson();
   }
-
-  (k as Mobil?)?.klakson();
 }</code></pre>
         </div>
 
@@ -465,33 +465,33 @@ void main() {
 // Kelas  : SI2A
 
 class Hewan {
-  void bersuara() => print('Hewan...');
+  void bersuara() => print('...');
 }
 
-class sapi extends Hewan {
+class Kucing extends Hewan {
   @override
-  void bersuara() => print('moh');
+  void bersuara() => print('Meong');
 }
 
-class burung extends Hewan {
+class Anjing extends Hewan {
   @override
-  void bersuara() => print('cuit cuit');
+  void bersuara() => print('Guk guk');
 }
 
-class kambing extends Hewan {
+class Burung extends Hewan {
   @override
-  void bersuara() => print('mbek');
+  void bersuara() => print('Cit cit');
 }
 
 void main() {
   List<Hewan> daftarHewan = [
-    sapi(),
-    burung(),
-    kambing(),
+    Kucing(),
+    Anjing(),
+    Burung(),
   ];
 
-  for (var h in daftarHewan) {
-    h.bersuara();
+  for (var hewan in daftarHewan) {
+    hewan.bersuara();
   }
 }</code></pre>
         </div>
