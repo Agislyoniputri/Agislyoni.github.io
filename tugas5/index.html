@@ -452,7 +452,9 @@ void main() {
 
         <section>
             <h2>Sealed Class</h2>
-            <p>Sealed class adalah class yang membatasi dan “mengunci” semua kemungkinan turunannya, sehingga hanya class tertentu saja yang boleh mewarisinya.</p>
+            <p>•Mendeklarasikan sealed class ApiResponse</p>
+            <p>•Menentukan turunan: Success dan Error</p>
+             <p>•Berfungsi sebagai library (class dasar)</p>
 <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
@@ -469,7 +471,17 @@ class Success extends ApiResponse {
 class Error extends ApiResponse {
   final String errorMessage;
   Error(this.errorMessage);
-}
+}</code></pre>
+        </div>
+      <p>•Menggunakan class dari libsealed.dart</p>
+      <p>•Menampilkan hasil Success dan Error</p>
+      <p>•Digunakan untuk menguji sealed class</p>
+
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
 
 void handleResponse(ApiResponse response) {
   if (response is Success) {
@@ -485,21 +497,23 @@ void main() {
 }</code></pre>
         </div>
 
+
         <div>
                 <a href="#" onclick="openModal('sealed.jpeg'); return false;"
                     class="dartpad-btn">
                     <span>▶</span> capture
                 </a>
+                
             </div>
         </section>
               
 
         <section>
         <h2>base class</h2>
-        <p>Base class adalah class yang mengatur cara pewarisan
-Base class itu dibuat supaya class lain hanya boleh menggunakan dia dengan cara tertentu, yaitu:
-Boleh di-extend (extends) Artinya class baru benar-benar mewarisi semua sifat dan perilaku dari base class
-Tidak boleh di-implement (implements)</p>
+        <p>•Mendeklarasikan base class Animal</p>
+      <p>•Mengatur pewarisan menggunakan extends</p>
+      <p>•memiliki fungsi sebagai dasar pewarisan</p>
+
 
         <div class="code-container">
             <div class="code-header">contoh</div>
@@ -523,13 +537,28 @@ base class Cat extends Animal {
   void speak() {
     print("Meow!");
   }
-}
+}</code></pre>
+        </div>
+        <p>•Membuat class turunan (Dog dan Cat)</p>
+      <p>•Mewarisi dari class Animal</p>
+
+
+
+
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+
+  import 'animal.dart';
 
 void main() {
-  Animal dog = Dog();
+  var dog = Dog();
   dog.speak();
 
-  Animal cat = Cat();
+  var cat = Cat();
   cat.speak();
 }</code></pre>
         </div>
@@ -546,7 +575,9 @@ void main() {
         <section>
           <h2>final class</h2>
 
-        <p>Final class adalah class yang tidak bisa di-extend (diturunkan) oleh class lain. Keyword `final` digunakan untuk mendeklarasikan class yang tidak bisa diturunkan.</p>
+        <p>•Membuat final class Settings sebagai class utama</p>
+<p>•Class ini tidak bisa diwarisi (tidak bisa di-extends oleh class lain)</p>
+<p>•Digunakan untuk menyimpan data pengaturan seperti tema dan ukuran font</p>
         
 
         <div class="code-container">
@@ -569,7 +600,20 @@ final class Settings {
 base class CustomSettings extends Settings {
   CustomSettings(String theme, int fontSize)
       : super(theme: theme, fontSize: fontSize);
-}
+}</code></pre>
+        </div>
+<p>•Pada fungsi main(), dibuat objek Settings dengan nilai tertentu
+Program akan mencetak tema dan ukuran font sesuai data yang dimasukkan</p>
+<p>•Method showSettings() dipanggil untuk menampilkan hasil</p>
+<p>•Program akan mencetak tema dan ukuran font sesuai data yang dimasukkan</p>
+        
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+import 'settings.dart';
 
 void main() {
   Settings settings = Settings(theme: "Dark", fontSize: 14);
