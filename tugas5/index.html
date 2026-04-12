@@ -809,9 +809,19 @@ final class MathUtils {
   static int multiply(int a, int b) => a * b;
 
   static double divide(int a, int b) => a / b;
-}
+}</code></pre>
+        </div>
+        <p>•UserRepository merupakan turunan dari Repository (menggunakan extends)</p>
+<p>•Melakukan override pada method create</p>
+<p>•Fungsi main() digunakan untuk menjalankan program</p>
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
 
-// MAIN
+import 'repository.dart';
+
 void main() {
   var userRepo = UserRepository();
 
@@ -827,10 +837,11 @@ void main() {
   print(MathUtils.multiply(10, 5));
   print(MathUtils.divide(10, 5));
 }</code></pre>
-        </div>
+ </div>
+
 
         <div>
-                <a href="#" onclick="openModal('bonus.jpeg'); return false;"
+                <a href="#" onclick="openModal('bonusA.jpg'); return false;"
                     class="dartpad-btn">
                     <span>▶</span> capture
                 </a>
@@ -864,7 +875,17 @@ final class MathUtils {
   static double bagi(int a, int b) {
     return a / b;
   }
-}
+}</code></pre>
+        </div>
+        <p>•Menggunakan method yang ada di class MathUtils</p>
+<p>•Dapat dipanggil langsung tanpa membuat instance objek</p>
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+import 'math_utils.dart';
 
 void main() {
   print("Tambah: ${MathUtils.tambah(10, 5)}");
@@ -874,8 +895,9 @@ void main() {
 }</code></pre>
         </div>
 
+
         <div>
-                <a href="#" onclick="openModal('bonus1.jpeg'); return false;"
+                <a href="#" onclick="openModal('bonusB.jpg'); return false;"
                     class="dartpad-btn">
                     <span>▶</span> capture
                 </a>
