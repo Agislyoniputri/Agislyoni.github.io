@@ -321,8 +321,19 @@
 
         <section>
             <h2> Studi Kasus: Burung dan Bebek</h2>
-            <ul>
-                Mixin digunakan untuk menambahkan kemampuan ke dalam sebuah class tanpa harus menggunakan banyak pewarisan.Contohnya, class Bird bisa terbang, sedangkan Duck bisa terbang dan juga berenang karena menggunakan dua mixin yang berbeda.</ul>
+            <p><strong>Apa itu Mixin?</strong></p>
+<p>Mixin adalah cara Dart mengatasi keterbatasan multiple inheritance. Mixin memungkinkan kita menggunakan kembali kode dari beberapa sumber tanpa hierarki yang rumit.</p>
+
+<p><strong>Kapan pakai Mixin?</strong></p>
+<p>Saat ingin menambahkan perilaku yang sama ke berbagai class yang tidak memiliki hubungan hierarki.</p>
+
+<p>Contoh Kasus: Burung dan Bebek</p>
+
+<p>•Bird bisa terbang</p>
+
+<p>•Duck (bebek) bisa terbang DAN berenang</p>
+
+<p>Dengan mixin, kita buat CanFly dan CanSwim, lalu class yang butuh tinggal pakai keyword with..</p>
             <div class="code-container">
                 <div class="code-header">CONTOH: pewarisan</div>
                 <pre><code>// Nama   : Agis Lyoni Putri
@@ -367,7 +378,15 @@ void main() {
         <section>
           <h2> Studi Kasus: mixin dengan state</h2>
 
-            <p>Mixin dengan state digunakan untuk menambahkan tidak hanya kemampuan (method), tetapi juga data (variabel) ke dalam class. Contohnya, mixin Energy menyimpan nilai energi yang bisa digunakan oleh class seperti Bird atau Duck.</p>
+            <p>Mixin tidak hanya berisi method, tapi juga bisa memiliki variabel instance (state) dan logika internal. Ini powerful untuk komponen reusable dengan status.</p>
+
+<p>Contoh: Mixin CanFly yang menyimpan status apakah sedang terbang atau tidak.</p>
+
+<p><strong>Keunggulan:</strong></p>
+
+<p>•Setiap class yang menggunakan mixin memiliki state-nya sendiri (tidak berbagi)</p>
+
+<p>•Bisa menyimpan data internal seperti counter, status, dll</p>
 
             <div class="code-container">
                 <div class="code-header">contoh</div>
@@ -452,9 +471,22 @@ void main() {
 
         <section>
             <h2>Sealed Class</h2>
-            <p>•Mendeklarasikan sealed class ApiResponse</p>
-            <p>•Menentukan turunan: Success dan Error</p>
-             <p>•Berfungsi sebagai library (class dasar)</p>
+            <p><strong>Apa itu Sealed Class?</strong></p>
+            <p></p>Class yang hierarki pewarisannya tertutup - semua subclass harus didefinisikan dalam file yang sama.</p>
+
+<p><strong>Kegunaan:</strong></p>
+
+<p>•Mewakili finite state (API response, UI state: Loading, Success, Error)</p>
+
+<p>•Memungkinkan pattern matching yang exhaustive (compiler bisa memastikan semua kasus ditangani)</p>
+
+<p><strong>Keuntungan:</strong></p>
+
+<p>•Keamanan tipe - compiler tahu semua kemungkinan subclass</p>
+
+<p>•Pattern matching exhaustive - tidak ada kasus yang terlewat</p>
+
+<p>•Mencegah subclass dari file lain - hierarki terkontrol</p>
 <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
@@ -473,9 +505,6 @@ class Error extends ApiResponse {
   Error(this.errorMessage);
 }</code></pre>
         </div>
-      <p>•Menggunakan class dari libsealed.dart</p>
-      <p>•Menampilkan hasil Success dan Error</p>
-      <p>•Digunakan untuk menguji sealed class</p>
 
         <div class="code-container">
             <div class="code-header">contoh</div>
@@ -509,11 +538,24 @@ void main() {
               
 
         <section>
-        <h2>base class</h2>
-        <p>•Mendeklarasikan base class Animal</p>
-      <p>•Mengatur pewarisan menggunakan extends</p>
-      <p>•memiliki fungsi sebagai dasar pewarisan</p>
+          <h2>Base Class</h2>
+        <p><strong>Apa itu Base Class?</strong></p>
+        <p>Class yang wajib di-extends dan tidak boleh di-implements secara langsung.</p>
 
+        <p><strong>Kegunaan:</strong></p>
+        <p>•Membuat kerangka class yang mengharuskan pewarisan</p>
+
+        <p>•Memastikan semua subclass mengikuti kontrak yang benar</p>
+
+<p>Cocok untuk framework/library</p>
+
+<p><strong>Perbedaan dengan class biasa:</strong></p>
+
+<p>•Base class hanya bisa di-extends, tidak bisa di-implements</p>
+
+<p>•Memastikan semua method dari base class tersedia di subclass</p>
+
+<p>•Memberikan keamanan bahwa subclass tidak akan "melewatkan" implementasi method penting</p>
 
         <div class="code-container">
             <div class="code-header">contoh</div>
@@ -539,11 +581,6 @@ base class Cat extends Animal {
   }
 }</code></pre>
         </div>
-        <p>•Membuat class turunan (Dog dan Cat)</p>
-      <p>•Mewarisi dari class Animal</p>
-
-
-
 
         <div class="code-container">
             <div class="code-header">contoh</div>
@@ -575,10 +612,24 @@ void main() {
         <section>
           <h2>final class</h2>
 
-        <p>•Membuat final class Settings sebagai class utama</p>
-<p>•Class ini tidak bisa diwarisi (tidak bisa di-extends oleh class lain)</p>
-<p>•Digunakan untuk menyimpan data pengaturan seperti tema dan ukuran font</p>
-        
+        <p><strong>Apa itu Final Class?</strong></p>
+        <p>Class yang tidak bisa diwarisi sama sekali (tidak bisa di-extends maupun di-implements).</p>
+
+        <p><strong>Kegunaan:</strong></p>
+        <p>•Utility class (seperti MathUtils)</p>
+        <p>•Constants holder (menyimpan nilai konstanta global)</p>
+        <p>•Singleton pattern</p>
+
+        <p>•Value objects yang tidak perlu diwarisi</p>
+
+        <p><strong>Kapan pakai Final Class:</strong></p>
+        <p>ketika</p>
+        <p>•Utility class yang hanya berisi method static</p>
+        <p>•Constants holder</p>
+        <p>•Singleton pattern</p>
+        <p>•Value objects</p>
+
+        <p> >Jangan gunakan final jika class tersebut perlu dikembangkan (di-extends) di masa depan </p>
 
         <div class="code-container">
             <div class="code-header">contoh</div>
@@ -602,11 +653,7 @@ base class CustomSettings extends Settings {
       : super(theme: theme, fontSize: fontSize);
 }</code></pre>
         </div>
-<p>•Pada fungsi main(), dibuat objek Settings dengan nilai tertentu
-Program akan mencetak tema dan ukuran font sesuai data yang dimasukkan</p>
-<p>•Method showSettings() dipanggil untuk menampilkan hasil</p>
-<p>•Program akan mencetak tema dan ukuran font sesuai data yang dimasukkan</p>
-        
+
         <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
@@ -631,10 +678,21 @@ void main() {
                 </a>
             </div>
         </section>
-    
+
+        
         
     <section>
         <h2>Praktik 1 : Sealed Class dengan Pattern Matching</h2>
+        <p><strong>APA ITU SEALED CLASS?</strong></p>
+        <p></p>Sealed class adalah class yang hierarki pewarisannya tertutup — artinya semua subclass harus didefinisikan dalam file yang sama dengan sealed class-nya.</p>
+        <p>Kata kunci: sealed</p>
+
+        <p><strong>APA ITU PATTERN MATCHING?</strong></p>
+        <p>Pattern matching adalah fitur di Dart yang memungkinkan kita memeriksa tipe dan mengakses properti dari suatu object secara langsung dalam satu ekspresi.</p>
+
+        <p><strong>KENAPA SEALED CLASS + PATTERN MATCHING ADALAH KOMBINASI SEMPURNA?</strong></p>
+        <p>Karena sealed class membatasi kemungkinan subclass, maka compiler Dart bisa memastikan bahwa semua kemungkinan sudah ditangani dalam pattern matching.</p>
+
         <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
@@ -689,7 +747,19 @@ void main() {
     
     <section>
         <h2>Studi Kasus : Sistem State Management</h2>
-        <p>Sistem State Management adalah cara mengatur dan mengontrol kondisi (state) yang terjadi dalam sebuah aplikasi selama program berjalan.State di sini maksudnya adalah keadaan aplikasi pada saat tertentu.</p>
+        <p>State Management adalah cara mengatur dan mengontrol kondisi (state) sebuah aplikasi selama program berjalan. State bisa berupa:</p>
+
+<p>•Sedang loading</p>
+
+<p>•Berhasil memuat data</p>
+
+<p>•Gagal memuat data</p>
+
+<p>•Tidak ada data</p>
+
+<p>•Dan lain-lain</p>
+
+<p>Mengapa pakai Sealed Class? Karena state bersifat terbatas (finite), dan sealed class memastikan semua kemungkinan state ditangani dengan aman.</p>
 
         <div class="code-container">
             <div class="code-header">contoh</div>
@@ -731,6 +801,7 @@ void main() {
   updateUI(ErrorState("Gagal"));
 }</code></pre>
         </div>
+        
 
             <div class="dartpad-links">
                 <a href="#" onclick="openModal('https://dartpad.dev/?id=6a34ab268025d9f743e6bc2559e209b8&run=true'); return false;"
@@ -740,18 +811,29 @@ void main() {
             </div>
         </section>
 
+
         <section>
           <h2>Kesimpulan</h2>
         
-<p>Sealed class cocok untuk membuat tipe data dengan hierarki terbatas agar pattern matching aman. Base class digunakan untuk membuat class dasar yang bisa diturunkan di framework atau aplikasi. Final class cocok untuk utility class yang tidak boleh diturunkan atau diimplementasi dari luar.</p>
-</section>
+<p>•Multiple inheritance di Dart diselesaikan dengan MIXIN (gunakan keyword with)</p>
+
+<p>•Sealed class cocok untuk membuat tipe data dengan hierarki terbatas agar pattern matching aman</p>
+
+<p>•Base class digunakan untuk membuat class dasar yang bisa diturunkan di framework atau aplikasi</p>
+
+<p>•Final class cocok untuk utility class yang tidak boleh diturunkan atau diimplementasi dari luar</p>
+
+<p>Dengan memahami mixin dan class modifiers, kita bisa merancang kode Dart yang lebih aman, ekspresif, dan mudah dipelihara.</p>
+
+        </section>
+    
 
     <section>
       <h2>Bonus: Base Class Repository (CRUD)</h2>
-      <p>•Membuat base class Repository sebagai class utama</p>
-<p>•Berisi operasi dasar CRUD (Create, Read, Update, Delete)</p>
-<p>•Digunakan sebagai dasar untuk pengolahan data</p>
-        
+      <p><strong>APA ITU REPOSITORY PATTERN?</strong></p>
+<p>Repository pattern adalah desain pattern yang berfungsi sebagai jembatan antara aplikasi dengan sumber data (database, API, file, dll). Repository menyediakan antarmuka yang bersih untuk operasi data tanpa peduli dari mana data itu berasal.</p>
+
+<p><strong>Mengapa pakai BASE class? </strong> Karena dengan base modifier, kita memastikan bahwa semua repository turunan harus mengikuti kontrak yang sudah ditentukan dan tidak bisa diimplementasi ulang sembarangan.</p>
         <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
@@ -811,9 +893,7 @@ final class MathUtils {
   static double divide(int a, int b) => a / b;
 }</code></pre>
         </div>
-        <p>•UserRepository merupakan turunan dari Repository (menggunakan extends)</p>
-<p>•Melakukan override pada method create</p>
-<p>•Fungsi main() digunakan untuk menjalankan program</p>
+      
         <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
@@ -850,9 +930,16 @@ void main() {
    
     <section>
         <h2>Bonus: Final Class MathUtils (Static Methods)</h2>
-        <p>•Membuat final class MathUtils sebagai class utility</p>
-<p>•Menggunakan keyword final sehingga tidak bisa diwarisi</p>
-<p>•Digunakan untuk operasi perhitungan matematika</p>
+        <p><strong>APA ITU FINAL CLASS?</strong></p>
+        <p>Final class adalah class yang TIDAK BISA DIWARISI. Cocok untuk class utility seperti kalkulator, matematika, dll.</p>
+
+<p><strong>Mengapa pakai final?</strong></p>
+
+<p>•Tidak perlu diwarisi (cukup pakai langsung)</p>
+
+<p>•Method-methodnya bisa dipanggil tanpa membuat object</p>
+
+<p>•Lebih aman karena tidak bisa dimodifikasi oleh turunan</p>
         <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
@@ -877,8 +964,7 @@ final class MathUtils {
   }
 }</code></pre>
         </div>
-        <p>•Menggunakan method yang ada di class MathUtils</p>
-<p>•Dapat dipanggil langsung tanpa membuat instance objek</p>
+      
         <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
