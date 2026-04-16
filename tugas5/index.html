@@ -298,6 +298,30 @@
             color: #831d42;
             border-left: 5px solid #fb6f92;
         }
+        table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background: #ffe5ec;
+    color: #fb6f92;
+    font-weight: 700;
+}
+
+td {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+tr {
+    border-bottom: 1px solid #ffb3c1;
+}
     </style>
 </head>
 
@@ -312,28 +336,26 @@
 
     <div class="container">
 
-        <section>
-            <h2> pengertian</h2>
-            <p>Multiple inheritance adalah konsep di mana sebuah class dapat mewarisi sifat (atribut & method) dari lebih dari satu class induk (parent class).</p>
-            <p>Class modifiers adalah kata kunci yang digunakan untuk mengubah perilaku atau sifat dari sebuah class, seperti `abstract`, `interface`, `sealed`, dan `base`.</p>
-
-        </section>
+            <section>
+    <h2> Pengertian Multiple Inheritance & Class Modifiers</h2>
+    <p><span class="highlight">Multiple inheritance</span> adalah konsep di mana sebuah class bisa mewarisi atribut dan method dari lebih dari satu class induk. Dalam Dart, konsep ini diterapkan menggunakan <strong>mixin</strong>.</p>
+    
+    <p><span class="highlight">Class modifiers</span> merupakan kata kunci yang berfungsi untuk mengatur perilaku atau karakteristik suatu class, seperti <code>abstract</code>, <code>interface</code>, <code>sealed</code>, <code>base</code>, dan <code>final</code>.</p>
+    
+    <p>Dalam OOP, terdapat beberapa konsep utama yang saling berhubungan, seperti <strong>multiple inheritance dengan mixin</strong>, <strong>polimorfisme</strong>, dan <strong>abstraksi</strong>.</p>
+    
+    <ul>
+        <li><strong>Multiple Inheritance dengan Mixin</strong> - memungkinkan penambahan beberapa kemampuan dalam satu class tanpa pewarisan langsung</li>
+        <li><strong>Polimorfisme</strong> - satu jenis data dapat digunakan oleh berbagai objek dengan perilaku yang berbeda</li>
+        <li><strong>Abstraksi</strong> - menyederhanakan sistem dengan menyembunyikan bagian yang tidak perlu</li>
+    </ul>
+</section>
+    
 
         <section>
             <h2> Studi Kasus: Burung dan Bebek</h2>
-            <p><strong>Apa itu Mixin?</strong></p>
-<p>Mixin adalah cara Dart mengatasi keterbatasan multiple inheritance. Mixin memungkinkan kita menggunakan kembali kode dari beberapa sumber tanpa hierarki yang rumit.</p>
-
-<p><strong>Kapan pakai Mixin?</strong></p>
-<p>Saat ingin menambahkan perilaku yang sama ke berbagai class yang tidak memiliki hubungan hierarki.</p>
-
-<p>Contoh Kasus: Burung dan Bebek</p>
-
-<p>•Bird bisa terbang</p>
-
-<p>•Duck (bebek) bisa terbang DAN berenang</p>
-
-<p>Dengan mixin, kita buat CanFly dan CanSwim, lalu class yang butuh tinggal pakai keyword with..</p>
+            <p>Mixin dipakai untuk menambahkan kemampuan ke dalam class tanpa banyak pewarisan. Contohnya, Bird bisa terbang, sedangkan Duck bisa terbang dan berenang karena menggunakan mixin.
+Burung adalah class induk, dan Bebek adalah turunannya. Bebek mewarisi sifat dari Burung, tapi bisa punya kemampuan tambahan.</p>
             <div class="code-container">
                 <div class="code-header">CONTOH: pewarisan</div>
                 <pre><code>// Nama   : Agis Lyoni Putri
@@ -378,16 +400,8 @@ void main() {
         <section>
           <h2> Studi Kasus: mixin dengan state</h2>
 
-            <p>Mixin tidak hanya berisi method, tapi juga bisa memiliki variabel instance (state) dan logika internal. Ini powerful untuk komponen reusable dengan status.</p>
-
-<p>Contoh: Mixin CanFly yang menyimpan status apakah sedang terbang atau tidak.</p>
-
-<p><strong>Keunggulan:</strong></p>
-
-<p>•Setiap class yang menggunakan mixin memiliki state-nya sendiri (tidak berbagi)</p>
-
-<p>•Bisa menyimpan data internal seperti counter, status, dll</p>
-
+            <p>Mixin dengan state digunakan untuk menambahkan fitur sekaligus menyimpan data (state) ke dalam sebuah class tanpa harus menggunakan pewarisan langsung.
+Dengan mixin, sebuah class bisa memiliki beberapa kemampuan tambahan beserta data yang mendukung fungsinya.</p>
             <div class="code-container">
                 <div class="code-header">contoh</div>
                 <pre><code>// Nama   : Agis Lyoni Putri
@@ -470,23 +484,22 @@ void main() {
         </section>
 
         <section>
+            <h2> Pengantar Class Modifiers</h2>
+            <p>Class modifiers adalah kata kunci dalam Dart yang digunakan untuk mengatur bagaimana sebuah class dapat digunakan, diwariskan, atau dibatasi aksesnya. Dengan adanya modifiers, developer dapat mengontrol perilaku class agar sesuai dengan kebutuhan program.</p>
+            <p><strong>Kenapa menggunakan class modifiers:</strong></p>
+            <ul>
+                <li>Mengontrol bagaimana class digunakan dan diwariskan</li>
+                <li>Mencegah penggunaan class secara sembarangan</li>
+                <li>Menjaga konsistensi dan keamanan struktur program</li>
+                <li>Mempermudah pengelolaan kode dalam skala besar</li>
+            </ul>
+        </section>
+
+        <section>
             <h2>Sealed Class</h2>
-            <p><strong>Apa itu Sealed Class?</strong></p>
-            <p></p>Class yang hierarki pewarisannya tertutup - semua subclass harus didefinisikan dalam file yang sama.</p>
-
-<p><strong>Kegunaan:</strong></p>
-
-<p>•Mewakili finite state (API response, UI state: Loading, Success, Error)</p>
-
-<p>•Memungkinkan pattern matching yang exhaustive (compiler bisa memastikan semua kasus ditangani)</p>
-
-<p><strong>Keuntungan:</strong></p>
-
-<p>•Keamanan tipe - compiler tahu semua kemungkinan subclass</p>
-
-<p>•Pattern matching exhaustive - tidak ada kasus yang terlewat</p>
-
-<p>•Mencegah subclass dari file lain - hierarki terkontrol</p>
+            
+           <p>Sealed class adalah class yang membatasi dan "mengunci" semua kemungkinan turunannya, sehingga hanya class tertentu saja yang boleh mewarisinya. Sealed class membatasi pewarisan hanya dalam satu file.</p>
+            
 <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
@@ -505,7 +518,15 @@ class Error extends ApiResponse {
   Error(this.errorMessage);
 }</code></pre>
         </div>
+        </section>
 
+        <section>
+          <h2>Keuntungan Sealed Class</h2>
+
+ <p>🌸Mengatur pewarisan class agar tidak sembarangan</p>
+ <p>🌸Menjamin hanya subclass tertentu yang dapat digunakan</p>
+ <p>🌸Memudahkan proses pengambilan keputusan dalam program</p>
+ <p>🌸Mengurangi risiko kondisi yang tidak tertangani dalam program</p>
         <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
@@ -539,24 +560,11 @@ void main() {
 
         <section>
           <h2>Base Class</h2>
-        <p><strong>Apa itu Base Class?</strong></p>
-        <p>Class yang wajib di-extends dan tidak boleh di-implements secara langsung.</p>
-
-        <p><strong>Kegunaan:</strong></p>
-        <p>•Membuat kerangka class yang mengharuskan pewarisan</p>
-
-        <p>•Memastikan semua subclass mengikuti kontrak yang benar</p>
-
-<p>•Cocok untuk framework/library</p>
-
-<p><strong>Perbedaan dengan class biasa:</strong></p>
-
-<p>•Base class hanya bisa di-extends, tidak bisa di-implements</p>
-
-<p>•Memastikan semua method dari base class tersedia di subclass</p>
-
-<p>•Memberikan keamanan bahwa subclass tidak akan "melewatkan" implementasi method penting</p>
-
+        <p>Base class adalah class yang mengatur cara pewarisan. Base class dibuat supaya class lain hanya boleh menggunakan dengan cara tertentu, yaitu:</p>
+            <ul>
+                <li><strong>Boleh di-extend (extends)</strong> - Artinya class baru benar-benar mewarisi semua sifat dan perilaku dari base class</li>
+                <li><strong>Tidak boleh di-implement (implements)</strong></li>
+            </ul>
         <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
@@ -581,7 +589,14 @@ base class Cat extends Animal {
   }
 }</code></pre>
         </div>
+        </section>
 
+        <section>
+          <h2>Kapan menggunakan Base Class</h2>
+
+<p>🌸Ketika ada beberapa class yang punya kesamaan sifat/perilaku</p>
+<p>🌸Kamu mau jadikan itu sebagai dasar (induk)</p>
+<p>🌸Supaya class turunan tinggal pakai (extends) dan konsisten</p>
         <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
@@ -612,27 +627,9 @@ void main() {
         <section>
           <h2>final class</h2>
 
-        <p><strong>Apa itu Final Class?</strong></p>
         <p>Class yang tidak bisa diwarisi sama sekali (tidak bisa di-extends maupun di-implements).</p>
-
-        <p><strong>Kegunaan:</strong></p>
-        <p>•Utility class (seperti MathUtils)</p>
-        <p>•Constants holder (menyimpan nilai konstanta global)</p>
-        <p>•Singleton pattern</p>
-
-        <p>•Value objects yang tidak perlu diwarisi</p>
-
-        <p><strong>Kapan pakai Final Class:</strong></p>
-        <p>ketika</p>
-        <p>•Utility class yang hanya berisi method static</p>
-        <p>•Constants holder</p>
-        <p>•Singleton pattern</p>
-        <p>•Value objects</p>
-
-        <p> >Jangan gunakan final jika class tersebut perlu dikembangkan (di-extends) di masa depan </p>
-
-        <div class="code-container">
-            <div class="code-header">contoh</div>
+ <div class="code-container">
+    <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
 // Nim    : 251410022
 // Kelas  : SI2A
@@ -653,6 +650,14 @@ base class CustomSettings extends Settings {
       : super(theme: theme, fontSize: fontSize);
 }</code></pre>
         </div>
+        </section>
+
+        <section>
+        <h2>penggunaan Final Class</h2>
+        <p>🌸Biar class nggak diubah-ubah</p>
+        <p>🌸Menjaga struktur tetap aman</p>
+        <p>🌸Cocok buat utility class</p>
+
 
         <div class="code-container">
             <div class="code-header">contoh</div>
@@ -679,19 +684,32 @@ void main() {
             </div>
         </section>
 
+        <section>
+            <h2> Perbandingan Class Modifiers</h2>
+            <table>
+                <thead>
+                    <tr><th>Modifier</th><th>Deskripsi</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>abstract</td><td>Tidak bisa dibuat objek langsung, digunakan sebagai dasar class</td></tr>
+                    <tr><td>base</td><td>Hanya dapat diwariskan dalam library yang sama</td></tr>
+                    <tr><td>interface</td><td>Digunakan sebagai kontrak yang harus diimplementasikan</td></tr>
+                    <tr><td>final</td><td>Tidak dapat diwariskan atau di-extend</td></tr>
+                    <tr><td>sealed</td><td>Membatasi subclass hanya dalam file yang sama</td></tr>
+                </tbody>
+            </table>
+        </section>
+
         
         
     <section>
         <h2>Praktik 1 : Sealed Class dengan Pattern Matching</h2>
-        <p><strong>APA ITU SEALED CLASS?</strong></p>
-        <p></p>Sealed class adalah class yang hierarki pewarisannya tertutup — artinya semua subclass harus didefinisikan dalam file yang sama dengan sealed class-nya.</p>
-        <p>Kata kunci: sealed</p>
-
-        <p><strong>APA ITU PATTERN MATCHING?</strong></p>
-        <p>Pattern matching adalah fitur di Dart yang memungkinkan kita memeriksa tipe dan mengakses properti dari suatu object secara langsung dalam satu ekspresi.</p>
-
-        <p><strong>KENAPA SEALED CLASS + PATTERN MATCHING ADALAH KOMBINASI SEMPURNA?</strong></p>
-        <p>Karena sealed class membatasi kemungkinan subclass, maka compiler Dart bisa memastikan bahwa semua kemungkinan sudah ditangani dalam pattern matching.</p>
+    
+    <p>Sealed class memungkinkan kita untuk mengetahui seluruh kemungkinan subclass yang ada dalam satu tempat.</p>
+    
+    <p>Dengan bantuan pattern matching, setiap kemungkinan tersebut bisa diperiksa dan ditangani sesuai dengan tipe objeknya.</p>
+    
+    <p>Pendekatan ini membuat kode lebih terstruktur dan aman karena semua kondisi dapat diproses tanpa ada yang terlewat.</p>
 
         <div class="code-container">
             <div class="code-header">contoh</div>
@@ -747,19 +765,26 @@ void main() {
     
     <section>
         <h2>Studi Kasus : Sistem State Management</h2>
-        <p>State Management adalah cara mengatur dan mengontrol kondisi (state) sebuah aplikasi selama program berjalan. State bisa berupa:</p>
+        
+    <p>State management merupakan cara untuk mengatur berbagai kondisi dalam aplikasi seperti loading, berhasil, maupun error.</p>
+    <p>Dengan menggunakan sealed class, setiap kondisi (state) dapat didefinisikan secara lebih jelas dan terstruktur.</p>
 
-<p>•Sedang loading</p>
+    <p><strong>Fitur:</strong></p>
+    <ul>
+        <li>Mengatur berbagai keadaan dalam aplikasi</li>
+        <li>Mengontrol jalannya proses program</li>
+    </ul>
 
-<p>•Berhasil memuat data</p>
+    <p><strong>Kenapa digunakan:</strong></p>
+    <ul>
+        <li>Agar pengelolaan kondisi aplikasi menjadi lebih rapi</li>
+        <li>Mengurangi kemungkinan error yang tidak tertangani</li>
+    </ul>
 
-<p>•Gagal memuat data</p>
-
-<p>•Tidak ada data</p>
-
-<p>•Dan lain-lain</p>
-
-<p>Mengapa pakai Sealed Class? Karena state bersifat terbatas (finite), dan sealed class memastikan semua kemungkinan state ditangani dengan aman.</p>
+    <p><strong>Batasan:</strong></p>
+    <ul>
+        <li>Bisa menjadi lebih rumit jika jumlah state terlalu banyak</li>
+    </ul>
 
         <div class="code-container">
             <div class="code-header">contoh</div>
@@ -813,27 +838,34 @@ void main() {
 
 
         <section>
-          <h2>Kesimpulan</h2>
-        
-<p>•Multiple inheritance di Dart diselesaikan dengan MIXIN (gunakan keyword with)</p>
-
-<p>•Sealed class cocok untuk membuat tipe data dengan hierarki terbatas agar pattern matching aman</p>
-
-<p>•Base class digunakan untuk membuat class dasar yang bisa diturunkan di framework atau aplikasi</p>
-
-<p>•Final class cocok untuk utility class yang tidak boleh diturunkan atau diimplementasi dari luar</p>
-
-<p>Dengan memahami mixin dan class modifiers, kita bisa merancang kode Dart yang lebih aman, ekspresif, dan mudah dipelihara.</p>
-
-        </section>
+    <h2>Ringkasan & Best Practices</h2>
+    <p><strong>Ringkasan:</strong></p>
+    <ul>
+        <li><strong>Sealed class</strong> digunakan untuk membatasi jumlah turunan class agar lebih terkontrol serta mendukung pengecekan kondisi</li>
+        <li><strong>Base class</strong> berfungsi sebagai class induk yang hanya bisa digunakan melalui pewarisan (extends)</li>
+        <li><strong>Final class</strong> digunakan untuk mengunci class agar tidak dapat diwariskan ke class lain</li>
+    </ul>
+    <p><strong>Best Practices:</strong></p>
+    <ul>
+        <li>Gunakan <strong>sealed class</strong> ketika jumlah kemungkinan state sudah jelas dan terbatas</li>
+        <li>Gunakan <strong>base class</strong> sebagai fondasi atau kerangka utama dalam program</li>
+        <li>Gunakan <strong>final class</strong> untuk class yang tidak perlu dikembangkan atau diturunkan lagi</li>
+    </ul>
+</section>
     
 
     <section>
       <h2>Bonus: Base Class Repository (CRUD)</h2>
-      <p><strong>APA ITU REPOSITORY PATTERN?</strong></p>
-<p>Repository pattern adalah desain pattern yang berfungsi sebagai jembatan antara aplikasi dengan sumber data (database, API, file, dll). Repository menyediakan antarmuka yang bersih untuk operasi data tanpa peduli dari mana data itu berasal.</p>
+      
+<p>Repository menggunakan base class supaya hanya bisa diwariskan (inheritance) dengan extends, bukan digunakan sembarangan dengan implements.</p>
 
-<p><strong>Mengapa pakai BASE class? </strong> Karena dengan base modifier, kita memastikan bahwa semua repository turunan harus mengikuti kontrak yang sudah ditentukan dan tidak bisa diimplementasi ulang sembarangan.</p>
+<p>Tujuan penggunaan base class atau abstract class adalah untuk membatasi penggunaan class agar tidak langsung dipakai tanpa aturan. Dengan begitu, hanya class turunan yang mengikuti struktur dan aturan tertentu yang boleh digunakan.</p>
+
+<p>Fitur Base Class pada Repository:</p>
+
+<p>🌸 Hanya dapat digunakan melalui pewarisan (extends)</p>
+<p>🌸 Tidak bisa di-implements dari luar sembarangan</p>
+<p>🌸 Menjamin struktur method tetap konsisten pada setiap turunan</p>
         <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
@@ -893,6 +925,17 @@ final class MathUtils {
   static double divide(int a, int b) => a / b;
 }</code></pre>
         </div>
+
+        <p>Kenapa Menggunakan Base Class pada Repository?</p>
+
+<p>Base class dipakai supaya struktur kode lebih terkontrol dan tidak sembarangan digunakan.</p>
+
+<p>Beberapa alasannya:</p>
+
+<p>🌸 Menjaga konsistensi → semua turunan punya method yang sama (create, read, update, delete)</p>
+<p>🌸 Mencegah penggunaan sembarangan → tidak bisa langsung dipakai tanpa aturan</p>
+<p>🌸 Mempermudah pengembangan → tinggal turunin class, tidak perlu buat ulang dari nol</p>
+<p>🌸 Mengatur arsitektur kode → biar rapi dan sesuai konsep OOP</p>
       
         <div class="code-container">
             <div class="code-header">contoh</div>
@@ -930,16 +973,8 @@ void main() {
    
     <section>
         <h2>Bonus: Final Class MathUtils (Static Methods)</h2>
-        <p><strong>APA ITU FINAL CLASS?</strong></p>
-        <p>Final class adalah class yang TIDAK BISA DIWARISI. Cocok untuk class utility seperti kalkulator, matematika, dll.</p>
-
-<p><strong>Mengapa pakai final?</strong></p>
-
-<p>•Tidak perlu diwarisi (cukup pakai langsung)</p>
-
-<p>•Method-methodnya bisa dipanggil tanpa membuat object</p>
-
-<p>•Lebih aman karena tidak bisa dimodifikasi oleh turunan</p>
+        
+        <p>MathUtils menggunakan final class karena hanya berisi fungsi utilitas dan tidak perlu diwariskan ke class lain. Penggunaan final class bertujuan untuk memastikan bahwa class ini tidak dapat diwariskan sehingga fungsi di dalamnya tetap aman dan tidak diubah oleh class lain.</p>
         <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
@@ -965,6 +1000,14 @@ final class MathUtils {
 }</code></pre>
         </div>
       
+        <p><strong>kenapa pakai final ?</strong></p>
+
+<p>•Tidak perlu diwarisi (cukup pakai langsung)</p>
+
+<p>•Method-methodnya bisa dipanggil tanpa membuat object</p>
+
+<p>•Lebih aman karena tidak bisa dimodifikasi oleh turunan</p>
+
         <div class="code-container">
             <div class="code-header">contoh</div>
             <pre><code>// Nama   : Agis Lyoni Putri
