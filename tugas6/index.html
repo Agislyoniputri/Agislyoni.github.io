@@ -344,7 +344,7 @@ void main() {
 
 
            <div>
-                <a href="#" onclick="openModal('sukses.jpg'); return false;"
+                <a href="#" onclick="openModal('tanpagenerik.jpeg'); return false;"
                     class="dartpad-btn">
                     <span>▶</span> klik output succes
                 </a>
@@ -374,7 +374,7 @@ void main() {
 
 
             <div>
-                <a href="#" onclick="openModal('error.jpg'); return false;"
+                <a href="#" onclick="openModal('erorgenerik.jpeg'); return false;"
                     class="dartpad-btn">
                     <span>▶</span> klik output error
                 </a>
@@ -405,10 +405,38 @@ void main() {
 }</code></pre>
         </div>
 
-            <div class="dartpad-links">
-                <a href="#" onclick="openModal('https://dartpad.dev/?id=8785d41c66f8a2e6e3d37bcfb37a1edd&run=true'); return false;"
+         <div>
+                <a href="#" onclick="openModal('solusi.jpeg'); return false;"
                     class="dartpad-btn">
-                    <span>▶</span> run
+                    <span>▶</span> klik output succes
+                </a>
+            </div>
+            
+
+            <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Box<T> {
+  T data;
+  Box(this.data);
+}
+
+void main() {
+  var intBox = Box<int>("42"); // ❌ error: tipe tidak sesuai
+  var stringBox = Box<String>("Hello");
+
+  print(intBox.data);
+  print(stringBox.data);
+}</code></pre>
+        </div>
+
+                   <div>
+                <a href="#" onclick="openModal('erorsolusi.jpeg'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> klik output error
                 </a>
             </div>
         </section>
@@ -865,9 +893,128 @@ void main() {
             </div>
         </section>
   
+        <section>
+            <h2>Latihan</h2>
+<div class="code-container">
+                <div class="code-header">contoh</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
 
+void main() {
+  // ===== Stack =====
+  var stack = Stack<int>();
+  stack.push(10);
+  stack.push(20);
+  print("Peek: ${stack.peek()}"); // 20
+  print("Pop: ${stack.pop()}");   // 20
 
-    </div>
+  // ===== Merge Lists =====
+  var hasil = mergeLists([1, 2], [3, 4]);
+  print("Merge: $hasil"); // [1, 2, 3, 4]
+
+  // ===== Response =====
+  var response = Response<String>(data: "Berhasil");
+  print("Response: ${response.data}");
+}
+
+// ============================
+// 1. Stack<T>
+// ============================
+class Stack<T> {
+  final List<T> _items = [];
+
+  void push(T value) {
+    _items.add(value);
+  }
+
+  T? pop() {
+    if (_items.isEmpty) return null;
+    return _items.removeLast();
+  }
+
+  T? peek() {
+    if (_items.isEmpty) return null;
+    return _items.last;
+  }
+}
+
+// ============================
+// 2. mergeLists<T>
+// ============================
+List<T> mergeLists<T>(List<T> a, List<T> b) {
+  return [...a, ...b];
+}
+
+// ============================
+// 3. Response<T>
+// ============================
+class Response<T> {
+  T? data;
+  String? error;
+
+  Response({this.data, this.error});
+}</code></pre>
+            </div>
+<div>
+                <a href="#" onclick="openModal('latihan.jpeg'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> klik output succes
+                </a>
+            </div>
+<section>
+            <h2>Latihan</h2>
+<div class="code-container">
+                <div class="code-header">contoh</div>
+                <pre><code>// Nama: Agis Lyoni Putri
+// NIM: 251410022
+// Kelas: SI2A
+
+void main() {
+  Stack<int> stack = Stack<int>();
+  stack.push("10"); // ❌ ERROR 1: String ke int
+
+  List<int> hasil = mergeLists<int>([1, 2], ["3", "4"]); // ❌ ERROR 2
+  print(hasil);
+
+  Response<String> response =
+      Response<String>(data: "Berhasil", error: 200); // ❌ ERROR 3
+  print(response.data);
+}
+
+// Stack
+class Stack<T> {
+  final List<T> items = [];
+
+  void push(T value) {
+    items.add(value);
+  }
+
+  T pop() {
+    return null; // ❌ ERROR 4: null ke non-nullable T
+  }
+}
+
+// mergeLists
+List<T> mergeLists<T>(List<T> a, List<T> b) {
+  return [...a, ...b];
+}
+
+// Response
+class Response<T> {
+  T data;
+  String error;
+
+  Response({required this.data, required this.error});
+}</code></pre>
+            </div>
+<div>
+                <a href="#" onclick="openModal('latihaneror.jpeg'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> klik output error
+                </a>
+         </div>
+    </section>
 
     <footer>
         🌸 AGIS LYONI PUTRI - 251410022 - SI2A 🌸
