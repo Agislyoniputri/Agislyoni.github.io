@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 Konstruktor & Enkapsulasi - Agis Lyoni Putri 🌸</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #7a4a4a;
+            background: #fff0f3;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 30%, #ffcad4, transparent 40%),
+                radial-gradient(circle at 80% 70%, #f4acb7, transparent 40%),
+                radial-gradient(circle at 50% 50%, #fff0f3, transparent 60%);
+            z-index: -2;
+        }
+
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-image:
+                radial-gradient(2px 2px at 10% 10%, #ff8fab, transparent),
+                radial-gradient(3px 3px at 30% 50%, #ffb3c1, transparent),
+                radial-gradient(2px 2px at 70% 80%, #fb6f92, transparent),
+                radial-gradient(4px 4px at 90% 10%, #ff8fab, transparent);
+            background-size: 600px 600px;
+            animation: floatSparkles 60s linear infinite;
+        }
+
+        @keyframes floatSparkles {
+            from {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            to {
+                transform: translateY(-600px) rotate(10deg);
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 30px;
+        }
+
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: #fb6f92;
+            text-shadow: 2px 4px 10px rgba(251, 111, 146, 0.2);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #ff8fab;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            border-radius: 40px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 15px 35px rgba(255, 143, 171, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #fb6f92;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 6px;
+            background: #ff8fab;
+            border-radius: 10px;
+        }
+
+        p {
+            font-weight: 400;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #7a4a4a;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        ul li {
+            margin-bottom: 12px;
+            padding-left: 35px;
+            position: relative;
+            color: #7a4a4a;
+        }
+
+        ul li::before {
+            content: "🌸";
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .code-container {
+            margin: 30px 0;
+            background: #fff5f7;
+            border: 2px dashed #ffb3c1;
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: #ffe5ec;
+            padding: 12px 25px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #fb6f92;
+            border-bottom: 1px solid #ffb3c1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        pre {
+            padding: 25px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #d63384;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .dartpad-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0 10px;
+        }
+
+        .dartpad-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff8fab, #fb6f92);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(251, 111, 146, 0.3);
+            gap: 8px;
+        }
+
+        .dartpad-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(251, 111, 146, 0.5);
+            background: linear-gradient(135deg, #fb6f92, #ff8fab);
+        }
+
+        .dartpad-btn i {
+            font-size: 1.1rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            background: rgba(255, 240, 243, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 85%;
+            background: white;
+            border: 5px solid #ffc2d1;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 143, 171, 0.3);
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close {
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            font-size: 45px;
+            color: #fb6f92;
+            cursor: pointer;
+            z-index: 1001;
+            font-weight: 900;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #ff8fab;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            color: #fb6f92;
+            font-weight: 700;
+            background: #ffeef2;
+            padding: 0 5px;
+            border-radius: 5px;
+        }
+
+        .slide-info {
+            background: #ffeef2;
+            border-radius: 30px;
+            padding: 15px 25px;
+            margin-bottom: 20px;
+            border-left: 8px solid #fb6f92;
+        }
+
+        .output-example {
+            background: #f0d9e0;
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin-top: 15px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #831d42;
+            border-left: 5px solid #fb6f92;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sparkles"></div>
+
+    <header>
+        <h1>🌸 Generic Dasar 🌸</h1>
+        <p>Agis Lyoni Putri | 251410022 | SI2A </p>
+    </header>
+
+    <div class="container">
+
+    
+        <section>
+          <h2>Pengantar Generic</h2>
+
+            <p>Generic adalah cara bikin kode yang fleksibel supaya bisa dipakai untuk berbagai tipe data tanpa harus nulis ulang. Dengan generic, kita bisa buat class, method, atau fungsi yang bisa bekerja dengan berbagai tipe data, tapi tetap aman karena tipe data itu ditentukan saat kita pakai.</p>
+        </section>
+
+        
+        <section>
+            <h2> Masalah Tanpa Generic</h2>
+            <p>Tanpa generic, kita harus buat class atau fungsi baru untuk setiap tipe data yang mau kita pakai. Ini bikin kode jadi banyak dan susah di-maintain karena banyak duplikasi.</p>
+            <p>Kode ini berhasil karena nilai yang dimasukkan (42) sesuai dengan tipe yang diambil (int), bukan karena penggunaan dynamic itu aman.</p>
+            <div class="code-container">
+                <div class="code-header">contoh succes</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Box {
+  dynamic data;
+  Box(this.data);
+}
+
+void main() {
+  var box = Box(42);
+  int value = box.data; // Bisa error kalau bukan int
+  print(value);
+}</code></pre>
+            </div>
+
+
+           <div>
+                <a href="#" onclick="openModal('sukses.jpg'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> klik output succes
+                </a>
+            </div>
+
+            
+            <p style="margin-top: 10px;">
+  Error terjadi karena tipe data tidak sesuai Di kode itu, data bertipe dynamic, artinya bisa menyimpan nilai apa saja tanpa dicek sejak awal. Saat kamu isi dengan "Halo", sebenarnya itu adalah String.</p>
+        
+<div class="code-container">
+                <div class="code-header">contoh error</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Box {
+  dynamic data;
+  Box(this.data);
+}
+
+void main() {
+  var box = Box("Halo"); // String
+  int value = box.data;  // Dipaksa jadi int
+  print(value);
+}</code></pre>
+            </div>
+
+
+            <div>
+                <a href="#" onclick="openModal('error.jpg'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> klik output error
+                </a>
+            </div>
+        </section>
+
+      
+        <section>
+            <h2>  Solusi Generic</h2>
+            <p>Generic digunakan untuk menentukan tipe data dari awal, supaya data lebih aman dan terkontrol</p>
+             <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Box<T> {
+  T data;
+  Box(this.data);
+}
+
+void main() {
+  var intBox = Box<int>(42);
+  var stringBox = Box<String>("Hello");
+
+  print(intBox.data);
+  print(stringBox.data);
+}</code></pre>
+        </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=8785d41c66f8a2e6e3d37bcfb37a1edd&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+  
+        <section>
+        <h2> Generic Class & Function</h2>
+        <p>Kita bisa bikin class dan fungsi generic untuk berbagai tipe data, jadi kode kita lebih fleksibel dan bisa dipakai ulang tanpa duplikasi.</p>
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class MyClass<T> {
+  T data;
+  MyClass(this.data);
+
+  T getData() {
+    return data;
+  }
+}
+
+T myFunc<T>(T value) {
+  return value;
+}
+
+void main() {
+  var a = MyClass<int>(10);
+  var b = MyClass<String>("test");
+
+  print(a.getData());
+  print(b.getData());
+
+  print(myFunc<int>(100));
+  print(myFunc<String>("hello"));
+}</code></pre>
+        </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=dfcc698ae7c103a7e813dd03640af898&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+        <section>
+          <h2> contoh Kelas Box<T></T></h2>
+
+        <p>Kelas Box<T> adalah contoh sederhana dari generic class di Dart. Dengan menggunakannya <T>, kita bisa membuat Box yang bisa menyimpan data dari berbagai tipe, seperti int, String, atau bahkan tipe data kustom lainnya. Ini membuat kode kita lebih fleksibel dan bisa digunakan kembali tanpa harus membuat class baru untuk setiap tipe data.</p>
+
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Box<T> {
+  T? _value;
+
+  Box(this._value);
+
+  T? get value => _value;
+
+  void setValue(T value) {
+    _value = value;
+  }
+}
+
+void main() {
+  var box = Box<int>(10);
+  print(box.value);
+
+  box.setValue(20);
+  print(box.value);
+}</code></pre>
+        </div>
+
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=4645a5a0c4961f2a81727151e1e9423d&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+    
+    <section>
+        <h2> Multiple Type Parameters</h2>
+        <p>Kita juga bisa menggunakan lebih dari satu parameter tipe dalam generic class atau fungsi. Ini memungkinkan kita untuk membuat struktur data yang lebih kompleks dan fleksibel, seperti pasangan nilai (pair) atau map yang bisa menyimpan berbagai tipe data.</p>
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Pair<K, V> {
+  K key;
+  V value;
+
+  Pair(this.key, this.value);
+
+  void printPair() {
+    print("Key: $key, Value: $value");
+  }
+}
+
+void main() {
+  var p1 = Pair<String, int>("age", 20);
+  p1.printPair();
+
+  var p2 = Pair<int, double>(1, 2.5);
+  p2.printPair();
+}</code></pre>
+        </div>
+
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=2971c9c3390c9cbe6926282b998b532d&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+
+        </section>
+
+
+    
+    <section>
+        <h2> menggabungkan dua nilai dengan tipe data yang berbeda</h2>
+        <p>Dengan menggunakan generic class Pair<K, V>, kita bisa menggabungkan dua nilai dengan tipe data yang berbeda dalam satu struktur data. Ini sangat berguna untuk menyimpan pasangan kunci-nilai, seperti dalam map atau dictionary, tanpa harus membuat class baru untuk setiap kombinasi tipe data.</p>
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+String combine<T, U>(T a, U b) {
+  return "$a, $b";
+}
+
+void main() {
+  print(combine<String, int>("Umur", 20));
+  print(combine<int, double>(10, 2.5));
+}</code></pre>
+        </div>
+
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=9e594a6be0abbb79cb663a1401aac472&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+    </section>
+
+    
+    <section>
+        <h2> Generic dengan extend</h2>
+        <p>Kita bisa menggunakan keyword extends untuk membatasi tipe data yang bisa digunakan dalam generic class atau fungsi. Ini memungkinkan kita untuk memastikan bahwa hanya tipe data tertentu yang dapat digunakan, sehingga meningkatkan keamanan tipe dan mencegah kesalahan saat runtime.</p>
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class NumberBox<T extends num> {
+  T value;
+  NumberBox(this.value);
+}
+
+void main() {
+  var a = NumberBox<int>(10);
+  var b = NumberBox<double>(3.14);
+
+  print(a.value);
+  print(b.value);
+}</code></pre>
+        </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=f60d69ef228feadb226e192b26fa9277&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+  
+    <section>
+      <h2> Type Inference (Inferensi Tipe)</h2>
+
+        <p>Dart memiliki fitur type inference yang memungkinkan compiler untuk secara otomatis menentukan tipe data dari variabel berdasarkan nilai yang diberikan. Dengan menggunakan generic, kita bisa memanfaatkan type inference untuk membuat kode lebih bersih dan mudah dibaca, tanpa harus selalu menyebutkan tipe data secara eksplisit.</p>
+        
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+T myFunc<T>(T value) => value;
+
+void main() {
+  var a = myFunc(10);
+  var b = myFunc("hello");
+
+  print(a.runtimeType); // int
+  print(b.runtimeType); // String
+}</code></pre>
+        </div>
+
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=b2389ce93a7e23b8248d15fb55445f42&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+        <section>
+          <h2>Pembatasan Tipe dan manfaatnya</h2>
+          <ul>
+            <li>Lebih aman → hanya tipe yang sesuai yang bisa dipakai (mengurangi error)</li>
+            <li>Lebih jelas → kita langsung tahu tipe data yang digunakan</li>
+            <li>Bisa pakai method tertentu → karena tipe sudah dibatasi</li>
+            <li>Mencegah kesalahan → tidak bisa pakai tipe yang salah</li>
+            <li>Lebih terstruktur → kode jadi rapi dan mudah dikembangkan</li>
+          </ul>
+
+        </section>
+   
+
+    <section>
+        <h2>Pembatasan Tipe pada Interface dan Class</h2>
+        <p>Kita bisa menggunakan generic untuk membatasi tipe data yang dapat digunakan dalam interface atau class. Dengan cara ini, kita bisa memastikan bahwa hanya tipe data tertentu yang dapat diimplementasikan atau diwariskan, sehingga meningkatkan keamanan tipe dan mencegah kesalahan saat runtime.</p>
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+void printIterable<T extends Iterable>(T data) {
+  for (var item in data) {
+    print(item);
+  }
+}
+
+void main() {
+  printIterable<List<int>>([1, 2, 3]);
+  printIterable<Set<String>>({"a", "b"});
+}</code></pre>
+        </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=5645a9edd4a9c83499e2e6fbe22c42c3&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+    
+    <section>
+        <h2> Pembatasan Tipe dengan Class Abstract</h2>
+        <p>Pembatasan tipe dengan class abstract berarti kita membatasi generic agar hanya bisa menggunakan turunan dari class abstract tertentu. Jadi, tipe data yang dipakai harus merupakan subclass (anak) dari class abstract tersebut.</p>
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+abstract class Animal {
+  void makeSound();
+}
+
+class Dog implements Animal {
+  void makeSound() => print("Woof");
+}
+
+class Cat implements Animal {
+  void makeSound() => print("Meow");
+}
+
+class Cage<T extends Animal> {
+  T animal;
+  Cage(this.animal);
+
+  void sound() {
+    animal.makeSound();
+  }
+}
+
+void main() {
+  Cage(Dog()).sound();
+  Cage(Cat()).sound();
+}</code></pre>
+        </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=2a057c57d570dc48a83788218ace7939&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+    
+    <section>
+        <h2> Praktik 1 – Generic Class & Fungsi</h2>
+        
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Repository<T> {
+  final List<T> _data = [];
+
+  void save(T item) {
+    _data.add(item);
+  }
+
+  T getById(int id) {
+    return _data[id];
+  }
+
+  List<T> getAll() {
+    return _data;
+  }
+}
+
+// Fungsi swap
+void swap<T>(List<T> list, int i, int j) {
+  var temp = list[i];
+  list[i] = list[j];
+  list[j] = temp;
+}
+
+// Class Triple
+class Triple<A, B, C> {
+  A first;
+  B second;
+  C third;
+
+  Triple(this.first, this.second, this.third);
+}
+
+void main() {
+  // =====================
+  // TEST Repository
+  // =====================
+  var repo = Repository<String>();
+  repo.save("Data 1");
+  repo.save("Data 2");
+
+  print("Semua data: ${repo.getAll()}");
+  print("Data index 0: ${repo.getById(0)}");
+
+  // =====================
+  // TEST swap
+  // =====================
+  var list = [1, 2, 3];
+  swap(list, 0, 2);
+  print("Setelah swap: $list");
+
+  // =====================
+  // TEST Triple
+  // =====================
+  var triple = Triple<String, int, double>("Umur", 20, 3.14);
+  print("Triple: ${triple.first}, ${triple.second}, ${triple.third}");
+}</code></pre>
+        </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=8fdfff2dfbd331a2f7836409881804bc&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+
+    <section>
+        <h2> Generic vs Dynamic vs Object</h2>
+        <p>Generic memberikan keamanan tipe yang lebih baik dibandingkan dengan dynamic atau Object. Dengan generic, kita bisa memastikan bahwa hanya tipe data tertentu yang dapat digunakan, sehingga mencegah kesalahan saat runtime. Sementara dynamic dan Object memungkinkan fleksibilitas, mereka tidak memberikan jaminan tipe, yang bisa menyebabkan error jika digunakan secara tidak hati-hati.</p>
+        <div class="code-container">
+            <div class="code-header">contoh</div>
+            <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Box<T> {
+  T data;
+  Box(this.data);
+}
+
+void main() {
+  Box<int> a = Box<int>(10);
+  dynamic b = 10;
+  Object c = 10;
+
+  print(a.data);
+  print(b);
+  print(c);
+}</code></pre>
+        </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=e19f562eabb3a2a6a73e1d57ecea6567&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+
+
+        <section>
+            <h2>Studi Kasus – Cache Generic</h2>
+            <p>Kode ini mendemonstrasikan implementasi cache sederhana menggunakan generic class Cache<T>. Cache ini bisa menyimpan data dari berbagai tipe, seperti String, int, atau bahkan tipe data kustom lainnya. Dengan menggunakan generic, kita bisa membuat cache yang fleksibel dan dapat digunakan kembali untuk berbagai jenis data tanpa harus membuat class baru untuk setiap tipe data.</p>
+            <div class="code-container">
+                <div class="code-header">contoh</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Cache<T> {
+  final Map<String, T> _data = {};
+
+  void set(String key, T value) {
+    _data[key] = value;
+  }
+
+  T? get(String key) {
+    return _data[key];
+  }
+}
+
+void main() {
+  var cache = Cache<String>();
+  cache.set("name", "Lyoni");
+
+  print(cache.get("name"));
+}</code></pre>
+            </div>
+
+            <div class="dartpad-links">
+                <a href="#" onclick="openModal('https://dartpad.dev/?id=8504f22c51606fe761430d34cdcce536&run=true'); return false;"
+                    class="dartpad-btn">
+                    <span>▶</span> run
+                </a>
+            </div>
+        </section>
+  
+
+
+    </div>
+
+    <footer>
+        🌸 AGIS LYONI PUTRI - 251410022 - SI2A 🌸
+    </footer>
+
+        <!-- MODAL -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <iframe id="dartFrame" src=""></iframe>
+            </div>
+        </div>
+
+        <script>
+            // Reveal Animations
+            const sections = document.querySelectorAll("section");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(sec => observer.observe(sec));
+
+            // Modal Logic
+            function openModal(link) {
+                document.getElementById("modal").style.display = "block";
+                document.getElementById("dartFrame").src = link;
+                document.body.style.overflow = "hidden";
+            }
+
+            function closeModal() {
+                document.getElementById("modal").style.display = "none";
+                document.getElementById("dartFrame").src = "";
+                document.body.style.overflow = "auto";
+            }
+
+            window.onclick = function (e) {
+                if (e.target == document.getElementById("modal")) closeModal();
+            }
+
+            // Security Protocol
+            document.addEventListener('contextmenu', e => e.preventDefault());
+            document.onkeydown = function (e) {
+                if (e.keyCode == 123) return false;
+                if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) return false;
+                if (e.ctrlKey && e.keyCode == 85) return false;
+                if (e.ctrlKey && e.keyCode == 83) return false;
+            };
+            document.onselectstart = function () { return false; };
+        </script>
+</body>
+
+</html>
