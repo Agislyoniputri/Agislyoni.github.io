@@ -252,23 +252,33 @@
             transform: translate(-50%, -50%);
             width: 90%;
             height: 85%;
-            background: white;
-            border: 5px solid #ffc2d1;
-            border-radius: 40px;
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(255, 143, 171, 0.3);
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .modal-content iframe {
+        .modal-content iframe, .modal-content img {
             width: 100%;
             height: 100%;
-            border: none;
+            border: 5px solid #ffc2d1;
+            border-radius: 40px;
+            object-fit: contain;
+            box-shadow: 0 0 50px rgba(255, 143, 171, 0.3);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-         .modal-content img {
-         width: 100%;
-         height: 100%;
-         object-fit: contain;
-      }
+
+        #modalImg {
+            cursor: zoom-in;
+            transform-origin: center;
+        }
+
+        #modalImg.zoomed {
+            cursor: zoom-out;
+            transform: scale(2.5);
+            object-fit: contain;
+        }
+
 
         .close {
             position: absolute;
@@ -333,6 +343,16 @@
     </header>
 
     <div class="container">
+        <!-- Slide 2: Review Sesi 5 -->
+        <section>
+            <h2>Review Sesi 5: Class Modifiers</h2>
+            <p>Sebelum masuk ke Generic, kita telah mempelajari Class Modifiers yang mengatur bagaimana sebuah class bisa digunakan:</p>
+            <ul>
+                <li><span class="highlight">Sealed</span>: Membuat hierarki class yang tertutup, hanya bisa di-extend di library yang sama.</li>
+                <li><span class="highlight">Base</span>: Class yang hanya bisa di-extend, tidak bisa di-implement.</li>
+                <li><span class="highlight">Final</span>: Class yang tidak bisa di-extend atau di-implement dari luar library.</li>
+            </ul>
+        </section>
 
     
         <section>
@@ -465,7 +485,25 @@ void main() {
 
   
         <section>
-        <h2> Generic Class & Function</h2>
+            <h2>Sintaks & Koleksi Generic</h2>
+            <p>Dalam Generic, kita sering menggunakan konvensi nama untuk parameter tipe:</p>
+            <ul>
+                <li><strong>&lt;T&gt;</strong>: Type (Umum)</li>
+                <li><strong>&lt;E&gt;</strong>: Element (biasa di List/Set)</li>
+                <li><strong>&lt;K, V&gt;</strong>: Key & Value (pada Map)</li>
+                <li><strong>&lt;R&gt;</strong>: Return type</li>
+            </ul>
+            <p>Generic juga sangat umum digunakan pada koleksi bawaan Dart:</p>
+            <div class="code-container">
+                <div class="code-header">Generic Collections</div>
+                <pre><code>List&lt;int&gt; angka = [1, 2, 3];
+Set&lt;String&gt; nama = {"Agis", "Lyoni"};
+Map&lt;String, int&gt; nilai = {"Dart": 100, "Java": 90};</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2> Generic Class & Function</h2>
         <p>Kita bisa bikin class dan fungsi generic untuk berbagai tipe data, jadi kode kita lebih fleksibel dan bisa dipakai ulang tanpa duplikasi.</p>
         <div class="code-container">
             <div class="code-header">contoh</div>
@@ -938,6 +976,10 @@ void main() {
   // ===== Response =====
   var response = Response<String>(data: "Berhasil");
   print("Response: ${response.data}");
+
+  // ===== SecureBox =====
+  var secure = SecureBox<String>("Data Rahasia", "1234");
+  print("Secure Data: ${secure.getData("1234")}");
 }
 
 // ============================
@@ -976,6 +1018,21 @@ class Response<T> {
   String? error;
 
   Response({this.data, this.error});
+}
+
+// ============================
+// 4. SecureBox<T> (Slide 15)
+// ============================
+class SecureBox<T> {
+  final T _data;
+  final String _pin;
+
+  SecureBox(this._data, this._pin);
+
+  T? getData(String pin) {
+    if (pin == _pin) return _data;
+    return null;
+  }
 }</code></pre>
             </div>
 <div>
@@ -1030,7 +1087,7 @@ class Response<T> {
 }</code></pre>
             </div>
 <div>
-                <a href="#" onclick="openModal('latihaneror.jpeg'); return false;"
+                <a href="#" onclick="openModal('latihan.jpeg'); return false;"
                     class="dartpad-btn">
                     <span>▶</span> klik output error
                 </a>
@@ -1045,7 +1102,8 @@ class Response<T> {
         <div id="modal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
-                <iframe id="dartFrame" src=""></iframe>
+                <iframe id="dartFrame" src="" style="display:none;"></iframe>
+                <img id="modalImg" src="" style="display:none;">
             </div>
         </div>
 
@@ -1064,16 +1122,74 @@ class Response<T> {
 
             // Modal Logic
             function openModal(link) {
-                document.getElementById("modal").style.display = "block";
-                document.getElementById("dartFrame").src = link;
+                const modal = document.getElementById("modal");
+                const frame = document.getElementById("dartFrame");
+                const img = document.getElementById("modalImg");
+                
+                modal.style.display = "block";
                 document.body.style.overflow = "hidden";
+                img.classList.remove("zoomed");
+                img.style.transform = "";
+
+                if (link.match(/\.(jpeg|jpg|gif|png|webp)$/i)) {
+                    img.src = link;
+                    img.style.display = "block";
+                    frame.style.display = "none";
+                    frame.src = "";
+                } else {
+                    frame.src = link;
+                    frame.style.display = "block";
+                    img.style.display = "none";
+                    img.src = "";
+                }
             }
 
             function closeModal() {
+                const img = document.getElementById("modalImg");
+                img.classList.remove("zoomed");
+                img.style.transform = "";
                 document.getElementById("modal").style.display = "none";
                 document.getElementById("dartFrame").src = "";
+                document.getElementById("modalImg").src = "";
                 document.body.style.overflow = "auto";
             }
+
+            // Zoom & Pan Feature (Desktop & Mobile)
+            const modalImg = document.getElementById("modalImg");
+            
+            function handlePan(e) {
+                if (modalImg.classList.contains("zoomed")) {
+                    const rect = modalImg.getBoundingClientRect();
+                    let clientX, clientY;
+                    
+                    if (e.touches && e.touches.length > 0) {
+                        clientX = e.touches[0].clientX;
+                        clientY = e.touches[0].clientY;
+                    } else {
+                        clientX = e.clientX;
+                        clientY = e.clientY;
+                    }
+
+                    const x = (clientX - rect.left) / rect.width * 100;
+                    const y = (clientY - rect.top) / rect.height * 100;
+                    modalImg.style.transformOrigin = `${x}% ${y}%`;
+                }
+            }
+
+            modalImg.addEventListener("click", function(e) {
+                this.classList.toggle("zoomed");
+                if (!this.classList.contains("zoomed")) {
+                    this.style.transform = "";
+                }
+            });
+
+            modalImg.addEventListener("mousemove", handlePan);
+            modalImg.addEventListener("touchmove", function(e) {
+                if (this.classList.contains("zoomed")) {
+                    handlePan(e);
+                    e.preventDefault(); // Stop scrolling when panning image
+                }
+            }, { passive: false });
 
             window.onclick = function (e) {
                 if (e.target == document.getElementById("modal")) closeModal();
