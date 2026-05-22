@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 Resume Sesi 9 - Extension Methods - Agis Lyoni Putri 🌸</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #7a4a4a;
+            background: #fff0f3;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 30%, #ffcad4, transparent 40%),
+                radial-gradient(circle at 80% 70%, #f4acb7, transparent 40%),
+                radial-gradient(circle at 50% 50%, #fff0f3, transparent 60%);
+            z-index: -2;
+        }
+
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-image:
+                radial-gradient(2px 2px at 10% 10%, #ff8fab, transparent),
+                radial-gradient(3px 3px at 30% 50%, #ffb3c1, transparent),
+                radial-gradient(2px 2px at 70% 80%, #fb6f92, transparent),
+                radial-gradient(4px 4px at 90% 10%, #ff8fab, transparent);
+            background-size: 600px 600px;
+            animation: floatSparkles 60s linear infinite;
+        }
+
+        @keyframes floatSparkles {
+            from {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            to {
+                transform: translateY(-600px) rotate(10deg);
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 30px;
+        }
+
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: #fb6f92;
+            text-shadow: 2px 4px 10px rgba(251, 111, 146, 0.2);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #ff8fab;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            border-radius: 40px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 15px 35px rgba(255, 143, 171, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section.bonus {
+            border-color: rgba(251, 111, 146, 0.5);
+            background: rgba(255, 240, 243, 0.7);
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #fb6f92;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 6px;
+            background: #ff8fab;
+            border-radius: 10px;
+        }
+
+        p {
+            font-weight: 400;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #7a4a4a;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        ul li {
+            margin-bottom: 12px;
+            padding-left: 35px;
+            position: relative;
+            color: #7a4a4a;
+        }
+
+        ul li::before {
+            content: "🌸";
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .code-container {
+            margin: 30px 0;
+            background: #fff5f7;
+            border: 2px dashed #ffb3c1;
+            border-radius: 25px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .code-header {
+            background: #ffe5ec;
+            padding: 12px 25px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #fb6f92;
+            border-bottom: 1px solid #ffb3c1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        pre {
+            padding: 25px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #d63384;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .dartpad-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 18px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff8fab, #fb6f92);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(251, 111, 146, 0.3);
+            gap: 6px;
+        }
+
+        .dartpad-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(251, 111, 146, 0.4);
+            background: linear-gradient(135deg, #fb6f92, #ff8fab);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            background: rgba(255, 240, 243, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 85%;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: 5px solid #ffc2d1;
+            border-radius: 40px;
+            box-shadow: 0 0 50px rgba(255, 143, 171, 0.3);
+        }
+
+        .close {
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            font-size: 45px;
+            color: #fb6f92;
+            cursor: pointer;
+            z-index: 1001;
+            font-weight: 900;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #ff8fab;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            color: #fb6f92;
+            font-weight: 700;
+            background: #ffeef2;
+            padding: 0 5px;
+            border-radius: 5px;
+        }
+
+        .slide-info {
+            background: #ffeef2;
+            border-radius: 30px;
+            padding: 15px 25px;
+            margin-bottom: 20px;
+            border-left: 8px solid #fb6f92;
+        }
+
+        .output-example {
+            background: #f0d9e0;
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin-top: 15px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #831d42;
+            border-left: 5px solid #fb6f92;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sparkles"></div>
+
+    <header>
+        <h1>🌸 Resume Sesi 09: Extension Methods 🌸</h1>
+        <p>Agis Lyoni Putri | 251410022 | SI2A </p>
+    </header>
+
+    <div class="container">
+        <!-- Review Sesi 8 -->
+        <section>
+            <h2>Review Sesi 8: Builder Pattern</h2>
+            <p>Pada sesi sebelumnya, kita telah mempelajari kegunaan Builder Pattern. Pola desain creational ini sangat menolong saat menyusun pembentukan objek yang rumit langkah demi langkah secara rapi (method chaining).</p>
+            <div class="code-container">
+                <div class="code-header">Contoh API Builder</div>
+                <pre><code>// Contoh penggunaan Builder Pattern
+Pizza.builder().size('large').addTopping('cheese').build();</code></pre>
+            </div>
+        </section>
+
+        <!-- 01: Pengantar Extension Methods -->
+        <section>
+            <h2>01. Konsep Dasar Extension Methods</h2>
+            <p>Fitur Extension Methods (diperkenalkan sejak Dart 2.7) adalah cara yang elegan untuk memperluas fungsionalitas suatu tipe data (baik bawaan SDK maupun class buatan sendiri) tanpa perlu mengubah source code aslinya atau membuat sub-class baru.</p>
+            <div class="slide-info">
+                <ul>
+                    <li><b>Menambahkan fungsionalitas eksternal:</b> Sangat efisien ketika bekerja dengan pustaka pihak ketiga.</li>
+                    <li><b>Type-Safe:</b> Didukung penuh oleh analisis statik compiler Dart.</li>
+                    <li><b>Berorientasi Objek:</b> Pemanggilan method dapat dilakukan langsung dari instance tipe tersebut.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 02: Masalah Tanpa Extension Methods -->
+        <section>
+            <h2>02. Keterbatasan Tanpa Extension Methods</h2>
+            <p>Dahulu, developer sering memakai <i>helper class</i> statik untuk memodifikasi string atau data lainnya. Cara ini membuat kode terasa kurang berorientasi objek.</p>
+            
+            <div class="code-container">
+                <div class="code-header">FILE: libutility.dart</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class StringUtils {
+  static String capitalize(String text) {
+    if (text.isEmpty) return text;
+    return text[0].toUpperCase() + text.substring(1);
+  }
+
+  static bool isEmail(String text) {
+    return text.contains('@');
+  }
+}</code></pre>
+            </div>
+
+            <div class="code-container" id="code-utility">
+                <div class="code-header">
+                    <span>FILE: test_utility.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-utility', '221f58a8e36aa48e7865074d5dcae78c')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+import 'libutility.dart';
+
+void main() {
+  var name = 'john';
+  // Pemanggilan utility cara lama (kurang natural)
+  var capitalized = StringUtils.capitalize(name); 
+  var isEmail = StringUtils.isEmail('test@mail.com');
+
+  print('Original name: $name');
+  print('Capitalized name: $capitalized');
+  print('Is "test@mail.com" an email? $isEmail');
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 03: Solusi Dengan Extension Methods -->
+        <section>
+            <h2>03. Kelebihan Memakai Extension</h2>
+            <p>Dengan Extension Methods, kita memodifikasi String secara langsung sehingga penulisan kodenya jauh lebih luwes.</p>
+
+            <div class="code-container">
+                <div class="code-header">FILE: libextension_string.dart</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+extension StringExtensions on String {
+  String capitalize() {
+    if (isEmpty) return this;
+    return this[0].toUpperCase() + substring(1);
+  }
+
+  bool get isEmail => contains('@');
+}</code></pre>
+            </div>
+
+            <div class="code-container" id="code-extension-string">
+                <div class="code-header">
+                    <span>FILE: test_extension_string.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-extension-string', '6621d96f3e99eddc5f3996f427ca62cd')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+import 'libextension_string.dart';
+
+void main() {
+  var name = 'john';
+  // Pemanggilan method langsung dari objek String
+  var capitalized = name.capitalize();
+  var isEmail = 'test@mail.com'.isEmail;
+
+  print('Original name: $name');
+  print('Capitalized name: $capitalized');
+  print('Is "test@mail.com" an email? $isEmail');
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 04: Sintaks & DateTime Extensions -->
+        <section>
+            <h2>04. Deklarasi & Contoh DateTime</h2>
+            <p>Sintaks extension dideklarasikan memakai kata kunci <code>extension</code> diikuti target tipe di belakang <code>on</code>.</p>
+            
+            <div class="code-container">
+                <div class="code-header">FILE: libdatetime_extension.dart</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+extension DateTimeExtensions on DateTime {
+  // Menambahkan method
+  String format(String format) {
+    return '$day-$month-$year';
+  }
+
+  // Menambahkan getter
+  bool get isToday {
+    var today = DateTime.now();
+    return year == today.year && month == today.month && day == today.day;
+  }
+
+  // Menambahkan operator custom
+  DateTime operator +(Duration duration) {
+    return add(duration);
+  }
+}</code></pre>
+            </div>
+
+            <div class="code-container" id="code-datetime-ext">
+                <div class="code-header">
+                    <span>FILE: test_datetime_extension.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-datetime-ext', '8a7bc9d614daf6d7b84f8e99b081cba9')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+import 'libdatetime_extension.dart';
+
+void main() {
+  final now = DateTime.now();
+  print('--- Format Hari Ini ---');
+  print('Tanggal saat ini: ${now.format('dd-mm-yyyy')}');
+  print('Apakah hari ini? ${now.isToday}');
+
+  print('\n--- Penambahan Tanggal ---');
+  final start = DateTime(2025, 5, 20);
+  final offset = Duration(days: 7);
+  final end = start + offset; // Pemanggilan operator '+' custom
+  print('Tanggal Awal: ${start.format('dd-mm-yyyy')}');
+  print('Setelah 7 hari: ${end.format('dd-mm-yyyy')}');
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 05: Specialized Extension -->
+        <section>
+            <h2>05. Specialized Extension (List&lt;int&gt;)</h2>
+            <p>Kita dapat membatasi kegunaan extension agar hanya dapat diakses oleh koleksi dengan tipe generik yang spesifik, misalnya <code>List&lt;int&gt;</code>.</p>
+
+            <div class="code-container">
+                <div class="code-header">FILE: libintlist_extension.dart</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+extension IntListExtensions on List&lt;int&gt; {
+  int get sum => fold(0, (sum, val) => sum + val);
+
+  double get average => isEmpty ? 0 : sum / length;
+}</code></pre>
+            </div>
+
+            <div class="code-container" id="code-intlist-ext">
+                <div class="code-header">
+                    <span>FILE: test_intlist_extension.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-intlist-ext', '6de8e48d88674387a3f4e6a4b1daf27d')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+import 'libintlist_extension.dart';
+
+void main() {
+  var scores = [10, 20, 30, 40, 50];
+  print('Scores: $scores');
+  print('Total Sum: ${scores.sum}');
+  print('Average: ${scores.average}');
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 06: Extension untuk Null Safety -->
+        <section>
+            <h2>06. Nullable Extension (Null Safety)</h2>
+            <p>Dart mengizinkan pembuatan extension untuk tipe data nullable (tipe data yang dapat bernilai null/menggunakan tanda <code>?</code>).</p>
+
+            <div class="code-container">
+                <div class="code-header">FILE: libnullsafety_extension.dart</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+extension NullableStringExtensions on String? {
+  String get orEmpty => this ?? '';
+
+  bool get isNullOrEmpty => this == null || this!.isEmpty;
+}</code></pre>
+            </div>
+
+            <div class="code-container" id="code-nullsafety-ext">
+                <div class="code-header">
+                    <span>FILE: test_nullsafety_extension.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-nullsafety-ext', '3f616ac68d3e278ab8aad7ee447af2b0')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+import 'libnullsafety_extension.dart';
+
+void main() {
+  String? value;
+  print('orEmpty: "${value.orEmpty}"');
+  print('isNullOrEmpty: ${value.isNullOrEmpty}');
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 07: Utilities untuk Tipe Data Dasar -->
+        <section>
+            <h2>07. Utilities Tipe Dasar (num)</h2>
+            <p>Kita dapat memasang extension pada tipe numerik <code>num</code> agar otomatis tersedia baik untuk `int` maupun `double`.</p>
+
+            <div class="code-container">
+                <div class="code-header">FILE: libnumber_extension.dart</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+extension NumberExtensions on num {
+  // Format Rupiah
+  String toRupiah() {
+    return 'Rp${toStringAsFixed(0).replaceAllMapped(
+      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+      (match) => '${match[1]}.',
+    )}';
+  }
+
+  // Cek rentang
+  bool isBetween(num lower, num upper) {
+    return this >= lower && this <= upper;
+  }
+
+  // Operasi pangkat
+  num power(int exp) {
+    var res = this;
+    for (var i = 1; i < exp; i++) {
+      res *= this;
+    }
+    return res;
+  }
+}</code></pre>
+            </div>
+
+            <div class="code-container" id="code-number-ext">
+                <div class="code-header">
+                    <span>FILE: test_number_extension.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-number-ext', '39b2f98c7bf5e87bfc38e61093bb0ba1')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+import 'libnumber_extension.dart';
+
+void main() {
+  var salary = 2750000;
+  print('Gaji: ${salary.toRupiah()}');
+  print('Apakah 8 berada di range 1-10? ${8.isBetween(1, 10)}');
+  print('3 pangkat 4 = ${3.power(4)}');
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 08: Generic Extensions -->
+        <section>
+            <h2>08. Penerapan Generics pada Extension</h2>
+            <p>Extension juga dapat dikombinasikan dengan tipe generic <code>&lt;T&gt;</code> untuk memodifikasi list bertipe apa saja.</p>
+
+            <div class="code-container">
+                <div class="code-header">FILE: libgeneric_list_extension.dart</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+extension ListExtensions&lt;T&gt; on List&lt;T&gt; {
+  // Ambil elemen dengan aman
+  T? getOrNull(int index) {
+    if (index < 0 || index >= length) return null;
+    return this[index];
+  }
+
+  // Bagi list menjadi beberapa bagian (chunk)
+  List&lt;List&lt;T&gt;&gt; chunk(int size) {
+    var result = &lt;List&lt;T&gt;&gt;[];
+    for (var i = 0; i < length; i += size) {
+      result.add(sublist(i, i + size &gt; length ? length : i + size));
+    }
+    return result;
+  }
+
+  // Filter nilai unik
+  List&lt;T&gt; distinct() {
+    var unique = &lt;T&gt;[];
+    for (var element in this) {
+      if (!unique.contains(element)) {
+        unique.add(element);
+      }
+    }
+    return unique;
+  }
+}</code></pre>
+            </div>
+
+            <div class="code-container" id="code-generic-list-ext">
+                <div class="code-header">
+                    <span>FILE: test_generic_list_extension.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-generic-list-ext', 'dba667b7ad29fc01c292ae083fd6de9b')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+import 'libgeneric_list_extension.dart';
+
+void main() {
+  var names = ['agis', 'lyoni', 'agis', 'putri'];
+  print('Unique Names: ${names.distinct()}');
+  print('Chunks of 2: ${names.chunk(2)}');
+  print('Index 5 (Safe Get): ${names.getOrNull(5)}');
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 09: Unnamed Extensions -->
+        <section>
+            <h2>09. Unnamed / Private Extensions</h2>
+            <p>Jika extension dibuat tanpa memberikan nama, maka fungsionalitas tersebut hanya akan aktif di dalam file lokal tempat extension itu dideklarasikan.</p>
+
+            <div class="code-container" id="code-unnamed-ext">
+                <div class="code-header">
+                    <span>FILE: test_unnamed_extension.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-unnamed-ext', '70f69d66cf8fca25122add8e5d23263f')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+// Unnamed extension (hanya aktif pada file ini)
+extension on DateTime {
+  String toYYYYMMDD() => '$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
+
+  DateTime startOfDay() => DateTime(year, month, day);
+}
+
+void main() {
+  var time = DateTime.now();
+  print('Tanggal (yyyy-mm-dd): ${time.toYYYYMMDD()}');
+  print('Waktu Awal Hari: ${time.startOfDay()}');
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 10: Konflik Nama Extension -->
+        <section>
+            <h2>10. Resolusi Konflik Nama Extension</h2>
+            <p>Apabila beberapa extension memiliki nama method yang sama pada tipe data target yang sama, compiler akan menghasilkan error ambiguitas. Solusinya adalah memanggil secara eksplisit.</p>
+
+            <div class="code-container" id="code-conflict-ext">
+                <div class="code-header">
+                    <span>FILE: test_conflict_extension.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-conflict-ext', '8a9715d13cf56c98a03fc90aa0fcb740')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+// Simulasi dua extension yang berkonflik dalam satu file
+extension StringCaseExtensions on String {
+  String toCapital() => toUpperCase();
+}
+
+extension TextUtilsExtensions on String {
+  String toCapital() => toLowerCase();
+}
+
+void main() {
+  var val = 'AgIs';
+  
+  // var error = val.toCapital(); // ERROR: ambiguous member lookup
+
+  // Solusi: Pemanggilan Eksplisit
+  var resUpper = StringCaseExtensions(val).toCapital();
+  var resLower = TextUtilsExtensions(val).toCapital();
+
+  print('Teks Asli: $val');
+  print('StringCaseExtensions: $resUpper');
+  print('TextUtilsExtensions: $resLower');
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 11: Extension untuk Custom Classes -->
+        <section>
+            <h2>11. Extension untuk Custom Classes</h2>
+            <p>Kita dapat menerapkan extension methods pada class buatan kita sendiri untuk memisahkan logika model dari utility tambahannya.</p>
+
+            <div class="code-container">
+                <div class="code-header">FILE: libproduct_extension.dart</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Product {
+  final String name;
+  final double price;
+
+  Product(this.name, this.price);
+}
+
+extension DoubleRupiahFormatter on double {
+  String toRupiah() {
+    final intVal = toInt();
+    String numStr = intVal.toString();
+    String formatted = '';
+    int cnt = 0;
+    for (int i = numStr.length - 1; i >= 0; i--) {
+      formatted = numStr[i] + formatted;
+      cnt++;
+      if (cnt % 3 == 0 && i != 0) {
+        formatted = '.' + formatted;
+      }
+    }
+    return 'Rp$formatted';
+  }
+}
+
+extension ProductExtensions on Product {
+  Product applyDiscount(double percent) {
+    var newPrice = price * (1 - percent / 100);
+    return Product(name, newPrice);
+  }
+
+  String get details => '$name - ${price.toRupiah()}';
+
+  bool get isPremium => price > 500000;
+}</code></pre>
+            </div>
+
+            <div class="code-container" id="code-product-ext">
+                <div class="code-header">
+                    <span>FILE: test_product_extension.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-product-ext', '06ce5434a82ab05b710c18fdc3a1cd08')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+import 'libproduct_extension.dart';
+
+void main() {
+  var phone = Product('Handphone', 4500000);
+  var promo = phone.applyDiscount(15);
+
+  print(promo.details); // 'Handphone - Rp3.825.000'
+  print('Apakah premium? ${phone.isPremium}'); // true
+
+  var mouse = Product('Mouse', 120000);
+  print(mouse.details);
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 12: Validator Extensions -->
+        <section>
+            <h2>12. Praktik Validasi RegExp</h2>
+            <p>Menyematkan fungsi validasi masukan data (email, nomor ponsel, password) secara praktis memanfaatkan regex.</p>
+
+            <div class="code-container">
+                <div class="code-header">FILE: libvalidator_extension.dart</div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+extension StringValidators on String {
+  bool get isValidEmail {
+    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(this);
+  }
+
+  bool get isValidPhone {
+    return RegExp(r'^[0-9]{10,13}$').hasMatch(this);
+  }
+
+  bool get isValidSecurePassword {
+    return length >= 8 &&
+        contains(RegExp(r'[A-Z]')) &&
+        contains(RegExp(r'[a-z]')) &&
+        contains(RegExp(r'[0-9]'));
+  }
+}
+
+extension IntValidators on int {
+  bool get isAdult => this >= 18;
+  bool get isEven => this % 2 == 0;
+}</code></pre>
+            </div>
+
+            <div class="code-container" id="code-validator-ext">
+                <div class="code-header">
+                    <span>FILE: test_validator_extension.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-validator-ext', '6d821fd3e31bc75bf2a2fd6558355a30')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+import 'libvalidator_extension.dart';
+
+void main() {
+  var email = 'agis@lyoni.com';
+  var age = 20;
+  var pass = 'AgisLyoni22';
+
+  print('Email valid? ${email.isValidEmail}');
+  print('Apakah usia $age sudah dewasa? ${age.isAdult}');
+  print('Password aman? ${pass.isValidSecurePassword}');
+  print('Apakah 15 angka genap? ${15.isEven}');
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 13: Best Practices -->
+        <section>
+            <h2>13. Ringkasan & Best Practices</h2>
+            <p>Panduan penting ketika merancang Extension Methods:</p>
+            <div class="slide-info">
+                <ul>
+                    <li><b>Penamaan Extension:</b> Disarankan menggunakan format PascalCase dan deskriptif (misal: <code>StringValidators</code>).</li>
+                    <li><b>Prinsip Modularitas:</b> Letakkan extension sejenis di file terpisah agar pengelolaan file lebih mudah.</li>
+                    <li><b>Hindari Overuse:</b> Jangan mengubah semua kelas pembantu statik menjadi extension method jika kurang dibutuhkan.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- BONUS TUGAS 1 -->
+        <section class="bonus">
+            <h2>🌸 Bonus Soal 1: Konflik Nama Antar Extension</h2>
+            <p><b>Studi Kasus:</b> Dua buah extension menargetkan tipe String yang sama dengan nama method yang sama yaitu <code>toInt()</code> namun beda tipe kembalian.</p>
+
+            <div class="code-container" id="code-bonus-1">
+                <div class="code-header">
+                    <span>FILE: test_bonus_1.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-bonus-1', '8cf0ead3bd6989dfdb4a33d961451d47')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+extension StringNumber on String {
+  int toInt() {
+    return int.parse(this);
+  }
+}
+
+extension StringDouble on String {
+  double toInt() {  // ← Nama method sama, return type berbeda
+    return double.parse(this);
+  }
+}
+
+void main() {
+  String angka = '123';
+  
+  // print(angka.toInt()); // ❌ ERROR: Ambiguous member lookup
+
+  // Solusi: Pemanggilan Eksplisit
+  int hasilInt = StringNumber(angka).toInt();
+  double hasilDouble = StringDouble(angka).toInt();
+
+  print('Hasil StringNumber (int): $hasilInt');
+  print('Hasil StringDouble (double): $hasilDouble');
+}</code></pre>
+            </div>
+
+            <div class="output-example">
+                <b>Penjelasan Analitis:</b>
+                <p>1. <b>Apa yang terjadi?</b> Compiler akan menolak untuk mengompilasi kode tersebut (Compile-time error) karena pemanggilan <code>angka.toInt()</code> bersifat ambigu.</p>
+                <p>2. <b>Penyebabnya?</b> Dart tidak mendukung *method overloading* pada pencarian extension implisit. Karena kedua extension mengarah pada target bertipe data sama (<code>String</code>) dengan nama method yang sama (<code>toInt()</code>), compiler tidak tahu implementasi mana yang harus dipakai meskipun tipe kembaliannya berbeda.</p>
+                <p>3. <b>Solusi:</b> Lakukan pemanggilan secara eksplisit dengan menuliskan nama extension di depan variabel target, seperti <code>StringNumber(angka).toInt()</code> dan <code>StringDouble(angka).toInt()</code>.</p>
+            </div>
+        </section>
+
+        <!-- BONUS TUGAS 2 -->
+        <section class="bonus">
+            <h2>🌸 Bonus Soal 2: Member Private & Extension</h2>
+            <p><b>Studi Kasus:</b> Mencoba mengakses field private berawalan <code>_</code> milik suatu class dari dalam tubuh extension.</p>
+
+            <div class="code-container" id="code-bonus-2">
+                <div class="code-header">
+                    <span>FILE: test_bonus_2.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-bonus-2', '5a7f2660b5b472285c7fa182a3ea0ce4')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Counter {
+  int _value = 0;  // Private pada level file/library
+
+  void increment() {
+    _value++;
+  }
+
+  // Solusi: Buat getter public agar bisa diakses di file terpisah
+  int get value => _value;
+}
+
+extension CounterStats on Counter {
+  int getValue() {
+    // Berhasil dikompilasi jika class dan extension diletakkan di file yang sama
+    return _value; 
+  }
+}
+
+void main() {
+  var c = Counter();
+  c.increment();
+  print('Value: ${c.getValue()}');
+}</code></pre>
+            </div>
+
+            <div class="output-example">
+                <b>Penjelasan Analitis:</b>
+                <p>1. <b>Mengapa gagal dikompilasi di file terpisah?</b> Visibilitas private di Dart (menggunakan awalan <code>_</code>) didasarkan pada level <b>library (file)</b>, bukan class. Jika file extension dideklarasikan terpisah dari file class Counter, maka variabel <code>_value</code> tidak dapat terlihat atau diakses oleh extension.</p>
+                <p>2. <b>Solusi:</b> Letakkan class <code>Counter</code> dan extension <code>CounterStats</code> di dalam berkas/file yang sama, atau buat sebuah getter public (contoh: <code>int get value => _value;</code>) di dalam class asli agar extension di file terpisah dapat membacanya lewat getter tersebut.</p>
+            </div>
+        </section>
+
+        <!-- BONUS TUGAS 3 -->
+        <section class="bonus">
+            <h2>🌸 Bonus Soal 3: Prioritas Method Asli vs Extension</h2>
+            <p><b>Studi Kasus:</b> Class memiliki method bawaan asli dengan nama yang persis sama dengan method di dalam extension.</p>
+
+            <div class="code-container" id="code-bonus-3">
+                <div class="code-header">
+                    <span>FILE: test_bonus_3.dart</span>
+                    <button class="dartpad-btn" onclick="runCode('code-bonus-3', '42010b7806769d701b36ceb4ce273019')">▶ Run</button>
+                </div>
+                <pre><code>// Nama   : Agis Lyoni Putri
+// Nim    : 251410022
+// Kelas  : SI2A
+
+class Greeting {
+  String say() => 'Hello from class';
+}
+
+extension GreetingExt on Greeting {
+  String say() => 'Hello from extension';
+}
+
+// Mendefinisikan extension khusus nullable tipe
+extension GreetingNullableExt on Greeting? {
+  String sayNullable() {
+    if (this == null) return 'Hello from extension (Null)';
+    return 'Hello from extension (Not Null)';
+  }
+}
+
+void main() {
+  Greeting? obj = Greeting();
+  
+  // 1. Memanggil method asli bawaan kelas (prioritas utama)
+  print('Panggilan Implisit: ${obj?.say()}'); // Output: Hello from class
+  
+  // 2. Memaksa memanggil method extension (Panggilan Eksplisit)
+  print('Panggilan Eksplisit Extension: ${GreetingExt(obj!).say()}'); 
+
+  // 3. Menangani nilai null
+  obj = null;
+  print('Ketika Null: ${obj?.say()}'); // Output: null
+  print('Nullable Extension: ${GreetingNullableExt(obj).sayNullable()}');
+}</code></pre>
+            </div>
+
+            <div class="output-example">
+                <b>Penjelasan Analitis:</b>
+                <p>1. <b>Output dari program asli?</b> Output yang keluar adalah <code>Hello from class</code>.</p>
+                <p>2. <b>Mengapa demikian?</b> Aturan compiler Dart menetapkan bahwa <i>instance method</i> asli milik kelas selalu memiliki prioritas pemanggilan yang lebih tinggi dibandingkan extension method jika keduanya memiliki nama signature yang sama.</p>
+                <p>3. <b>Jika obj bernilai null?</b> Pemanggilan <code>obj?.say()</code> akan mengembalikan nilai <code>null</code> karena operator null-aware mencegah evaluasi method tanpa crash.</p>
+                <p>4. <b>Cara memastikan extension method yang dijalankan?</b> Panggil extension secara eksplisit dengan format pembungkus, misalnya: <code>GreetingExt(obj!).say()</code>.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        🌸 AGIS LYONI PUTRI - 251410022 - SI2A 🌸
+    </footer>
+
+    <!-- MODAL -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <iframe id="dartFrame" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Reveal Animations
+        const sections = document.querySelectorAll("section");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(sec => observer.observe(sec));
+
+        // Modal Logic
+        function runCode(id, gistId = null) {
+            const modal = document.getElementById("modal");
+            const frame = document.getElementById("dartFrame");
+            
+            modal.style.display = "block";
+            document.body.style.overflow = "hidden";
+
+            if (gistId) {
+                frame.src = `https://dartpad.dev/embed-inline.html?theme=dark&run=true&id=${gistId}`;
+            } else {
+                const code = document.getElementById(id).querySelector('code').innerText;
+                const encodedCode = encodeURIComponent(code);
+                frame.src = `https://dartpad.dev/embed-inline.html?theme=dark&run=true&code=${encodedCode}`;
+            }
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById("modal").style.display = "none";
+            document.getElementById("dartFrame").src = "";
+            document.body.style.overflow = "auto";
+        }
+
+        // Close modal when clicking background
+        window.onclick = function (e) {
+            if (e.target == document.getElementById("modal")) closeModal();
+        }
+
+        // Security Protocol
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.onkeydown = function (e) {
+            if (e.keyCode == 123) return false;
+            if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) return false;
+            if (e.ctrlKey && e.keyCode == 85) return false;
+            if (e.ctrlKey && e.keyCode == 83) return false;
+        };
+        document.onselectstart = function () { return false; };
+    </script>
+</body>
+
+</html>
