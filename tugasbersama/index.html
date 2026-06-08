@@ -381,17 +381,21 @@
     <p>
         Mengimplementasikan program menggunakan konsep Object Oriented Programming (OOP) untuk mengelola data zakat secara lebih efektif dan efisien.
     </p>
+</section>
 
-  <div class="code-container">
+<section>
+<h2>Source Code 1</h2>
+<p> merupakan class Orang yang berfungsi sebagai parent class atau kelas induk. Class ini 
+digunakan untuk menyimpan data umum yang dimiliki oleh setiap orang dalam sistem, yaitu nama dan alamat. 
+Selain itu, class ini memiliki method tampilkanInfo() yang digunakan untuk menampilkan informasi data orang. Dengan adanya class induk, 
+penulisan program menjadi lebih efisien karena data yang sama tidak perlu ditulis berulang kali pada class lain. </p>
+
+<div class="code-container">
     <div class="code-header">DART SOURCE CODE</div>
 <pre><code>
 
- // Nama   : Agis Lyoni Putri
-// Nim    : 251410022
-// Kelas  : SI2A
-
-// Nama   : Uliya Gumpari
-// Nim    : 251410008
+// Nama   : Uliya Gumpari (251410008)
+// Nama   : Agis Lyoni Putri (251410022)
 // Kelas  : SI2A
 
 class Orang {
@@ -401,7 +405,145 @@ class Orang {
   Orang(this.nama, this.alamat);
 
   void tampilkanInfo() {
-    print("Nama : $nama");
+    print("Nama   : $nama");
+    print("Alamat : $alamat");
+  }
+}
+
+</code></pre>
+</div>
+</section>
+
+<section>
+  <h2>Source Code 2</h2>
+  <p> merupakan class Muzakki yang mewarisi class Orang menggunakan konsep Inheritance. 
+    Class ini digunakan untuk menyimpan data pembayar zakat. Selain memiliki atribut nama dan
+     alamat dari class Orang, class ini juga memiliki atribut tambahan yaitu jumlahZakat.
+   Method bayarZakat() digunakan untuk menunjukkan proses pembayaran zakat oleh muzakki.</p>
+
+   <div class="code-container">
+    <div class="code-header">DART SOURCE CODE</div>
+<pre><code>
+  // Nama   : Uliya Gumpari (251410008)
+// Nama   : Agis Lyoni Putri (251410022)
+// Kelas  : SI2A
+
+class Muzakki extends Orang {
+  double jumlahZakat;
+
+  Muzakki(
+    String nama,
+    String alamat,
+    this.jumlahZakat,
+  ) : super(nama, alamat);
+
+  void bayarZakat() {
+    print("$nama telah membayar zakat sebesar Rp$jumlahZakat");
+  }
+}
+
+</code></pre>
+</div>
+</section>
+
+<section>
+<h2>Source Code 3</h2>
+<p> merupakan class Mustahik yang juga mewarisi class Orang. Class ini digunakan untuk menyimpan data penerima zakat. Selain atribut nama dan alamat, class ini memiliki atribut tambahan yaitu kategori yang menunjukkan golongan penerima zakat, misalnya fakir atau miskin. 
+Method terimaZakat() digunakan untuk menampilkan informasi penerimaan zakat oleh mustahik.</p>
+
+<div class="code-container">
+    <div class="code-header">DART SOURCE CODE</div>
+<pre><code>
+  // Nama   : Uliya Gumpari (251410008)
+// Nama   : Agis Lyoni Putri (251410022)
+// Kelas  : SI2A
+
+class Mustahik extends Orang {
+  String kategori;
+
+  Mustahik(
+    String nama,
+    String alamat,
+    this.kategori,
+  ) : super(nama, alamat);
+
+  void terimaZakat(double jumlah) {
+    print("$nama menerima bantuan zakat sebesar Rp$jumlah");
+  }
+}
+
+</code></pre>
+</div>
+</section>
+
+<section>
+<h2>Source Code 4</h2>
+<p>Source Code 4 terdiri dari class Zakat dan class Amil.
+Class Zakat digunakan untuk menyimpan informasi mengenai zakat, seperti jenis zakat dan jumlah zakat yang akan disalurkan. Method tampilkanInfo() digunakan untuk menampilkan informasi tersebut.
+Sedangkan class Amil digunakan untuk merepresentasikan petugas pengelola zakat. Class ini memiliki method distribusiZakat() yang berfungsi untuk menyalurkan zakat kepada mustahik. Kedua class ini berperan penting dalam proses pengelolaan dan pendistribusian zakat.
+
+<div class="code-container">
+    <div class="code-header">DART SOURCE CODE</div>
+<pre><code>
+
+  // Nama   : Uliya Gumpari (251410008)
+// Nama   : Agis Lyoni Putri (251410022)
+// Kelas  : SI2A
+
+class Zakat {
+  String jenisZakat;
+  double jumlah;
+
+  Zakat(this.jenisZakat, this.jumlah);
+
+  void tampilkanInfo() {
+    print("Jenis Zakat : $jenisZakat");
+    print("Jumlah      : Rp$jumlah");
+  }
+}
+
+class Amil {
+  String namaAmil;
+
+  Amil(this.namaAmil);
+
+  void distribusiZakat(
+      Mustahik mustahik,
+      double jumlah) {
+
+    print(
+      "$namaAmil menyalurkan zakat kepada ${mustahik.nama}");
+      
+    mustahik.terimaZakat(jumlah);
+  }
+}
+</code></pre>
+</div>
+</section>
+
+<section>
+<h2>Source Code 5</h2>
+<p> merupakan program lengkap yang menggabungkan seluruh class yang telah dibuat sebelumnya, yaitu class Orang, Muzakki, Mustahik, Zakat, dan Amil.
+Pada bagian ini dilakukan pembuatan objek untuk setiap class, kemudian program menjalankan proses pembayaran zakat oleh muzakki, menampilkan informasi zakat, serta melakukan pendistribusian zakat kepada mustahik melalui amil.
+Source code ini menunjukkan bagaimana konsep Object Oriented Programming (OOP) diterapkan dalam Sistem Pengelolaan Zakat Masjid sehingga setiap objek dapat bekerja sesuai tugas dan fungsinya masing-masing.
+Ketika program dijalankan, sistem akan menghasilkan output berupa data muzakki, informasi zakat, dan proses distribusi zakat kepada mustahik.</p>
+<div class="code-container">
+    <div class="code-header">DART SOURCE CODE</div>
+<pre><code>
+
+  
+  // Nama   : Uliya Gumpari (251410008)
+// Nama   : Agis Lyoni Putri (251410022)
+// Kelas  : SI2A
+
+class Orang {
+  String nama;
+  String alamat;
+
+  Orang(this.nama, this.alamat);
+
+  void tampilkanInfo() {
+    print("Nama   : $nama");
     print("Alamat : $alamat");
   }
 }
@@ -416,7 +558,7 @@ class Muzakki extends Orang {
   ) : super(nama, alamat);
 
   void bayarZakat() {
-    print("$nama membayar zakat sebesar Rp$jumlahZakat");
+    print("$nama telah membayar zakat sebesar Rp$jumlahZakat");
   }
 }
 
@@ -430,7 +572,7 @@ class Mustahik extends Orang {
   ) : super(nama, alamat);
 
   void terimaZakat(double jumlah) {
-    print("$nama menerima zakat sebesar Rp$jumlah");
+    print("$nama menerima bantuan zakat sebesar Rp$jumlah");
   }
 }
 
@@ -442,7 +584,7 @@ class Zakat {
 
   void tampilkanInfo() {
     print("Jenis Zakat : $jenisZakat");
-    print("Jumlah : Rp$jumlah");
+    print("Jumlah      : Rp$jumlah");
   }
 }
 
@@ -462,31 +604,51 @@ class Amil {
 
 void main() {
   Muzakki muzakki =
-      Muzakki("Ahmad", "Palembang", 500000);
+      Muzakki(
+        "Bapak H. Abdullah",
+        "Palembang",
+        750000,
+      );
 
   Mustahik mustahik =
-      Mustahik("Fatimah", "Palembang", "Fakir");
+      Mustahik(
+        "Ibu Siti Aminah",
+        "Palembang",
+        "Fakir",
+      );
 
   Zakat zakat =
-      Zakat("Zakat Fitrah", 500000);
+      Zakat(
+        "Zakat Fitrah",
+        750000,
+      );
 
   Amil amil =
-      Amil("Uliya");
+      Amil(
+        "Uliya dan Agis",
+      );
 
+  print("=== SISTEM PENGELOLAAN ZAKAT MASJID ===\n");
+
+  print("DATA MUZAKKI");
   muzakki.tampilkanInfo();
   muzakki.bayarZakat();
 
+  print("\nDATA ZAKAT");
   zakat.tampilkanInfo();
 
+  print("\nDISTRIBUSI ZAKAT");
   amil.distribusiZakat(
-      mustahik,
-      zakat.jumlah);
+    mustahik,
+    zakat.jumlah,
+  );
 }
+</code></pre>
+</div>
+<button onclick="openModal('https://dartpad.dev/?id=97e0a753d36ee59a33b07208971b0b54&run=true')">Run Program</button>
 
-  <button onclick="openModal('https://dartpad.dev/?id=c1f26ecd8e1a5b15d58b94d7c3eb5bd5&run=true')">Run Program</button>
 </section>
-  
-    
+
   </div>
 
   <footer>
