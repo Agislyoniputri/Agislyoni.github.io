@@ -329,19 +329,60 @@
 </section>
 
 <section>
-    <h2>Identifikasi Class</h2>
+    <h2>IDENTIFIKASI CLASS DAN OBJECT</h2>
 
-<pre>
+    <p>
+        Dalam sistem pengelolaan zakat masjid terdapat beberapa class yang digunakan untuk merepresentasikan data dan proses bisnis.
+    </p>
+
+    <h3>Class yang Digunakan</h3>
+
+    <ul>
+        <li>Orang</li>
+        <li>Muzakki</li>
+        <li>Mustahik</li>
+        <li>Zakat</li>
+        <li>Amil</li>
+        <li>PengelolaanZakat</li>
+    </ul>
+
+    <h3>Object yang Dibuat</h3>
+
+    <ul>
+        <li>muzakki</li>
+        <li>mustahik</li>
+        <li>zakat</li>
+        <li>amil</li>
+        <li>sistem</li>
+    </ul>
+
+    <p>
+        Class merupakan cetakan atau blueprint yang digunakan untuk membuat object. Sedangkan object merupakan implementasi nyata dari sebuah class yang digunakan saat program dijalankan.
+    </p>
+</section>
+
+<section>
+    <h2>RELASI ANTAR CLASS</h2>
+
+    <p>
+        Pada sistem ini terdapat hubungan inheritance dan hubungan penggunaan antar class.
+    </p>
+
+<pre><code>
 Orang
 ├── Muzakki
 └── Mustahik
 
-Zakat
-Amil
-</pre>
+PengelolaanZakat
+│
+├── Mengelola Muzakki
+├── Mengelola Mustahik
+├── Mengelola Zakat
+└── Mengelola Amil
+</code></pre>
 
     <p>
-        Orang merupakan parent class. Muzakki dan Mustahik merupakan child class yang mewarisi atribut dan method dari class Orang.
+        Class Orang berperan sebagai parent class. Class Muzakki dan Mustahik merupakan child class yang mewarisi atribut nama dan alamat dari class Orang. Sedangkan class PengelolaanZakat digunakan untuk mengatur seluruh proses bisnis dalam sistem.
     </p>
 </section>
 
@@ -358,6 +399,39 @@ Amil
         <li>Class Mustahik → Object mustahik</li>
         <li>Class Zakat → Object zakat</li>
         <li>Class Amil → Object amil</li>
+    </ul>
+</section>
+
+<section>
+    <h2>PROSES BISNIS SISTEM</h2>
+
+    <p>
+        Sistem Pengelolaan Zakat Masjid memiliki alur proses bisnis yang menggambarkan bagaimana zakat dikelola dari awal hingga disalurkan kepada penerima.
+    </p>
+
+<pre><code>
+Muzakki
+   ↓
+Membayar Zakat
+   ↓
+Data Zakat
+   ↓
+Pengelolaan Zakat
+   ↓
+Amil
+   ↓
+Mustahik
+</code></pre>
+
+    <h3>Alur Proses</h3>
+
+    <ul>
+        <li>Muzakki melakukan pembayaran zakat.</li>
+        <li>Data zakat dicatat ke dalam sistem.</li>
+        <li>Amil mengelola data zakat yang telah diterima.</li>
+        <li>Sistem menyimpan informasi zakat.</li>
+        <li>Zakat didistribusikan kepada mustahik yang berhak menerima.</li>
+        <li>Sistem menampilkan hasil distribusi zakat.</li>
     </ul>
 </section>
 
@@ -386,6 +460,35 @@ Amil
 </section>
 
 <section>
+    <h2>PENERAPAN KONSEP OOP</h2>
+
+    <h3>Class</h3>
+    <p>
+        Class yang digunakan dalam program ini adalah Orang, Muzakki, Mustahik, Zakat, Amil, dan PengelolaanZakat.
+    </p>
+
+    <h3>Object</h3>
+    <p>
+        Object yang dibuat pada program adalah muzakki, mustahik, zakat, amil, dan sistem.
+    </p>
+
+    <h3>Inheritance</h3>
+    <p>
+        Konsep inheritance diterapkan pada class Muzakki dan Mustahik yang mewarisi atribut dari class Orang menggunakan keyword extends.
+    </p>
+
+    <h3>Encapsulation</h3>
+    <p>
+        Data disimpan di dalam atribut setiap class sehingga informasi dapat dikelola secara terstruktur.
+    </p>
+
+    <h3>Abstraction</h3>
+    <p>
+        Seluruh proses bisnis pengelolaan zakat dipusatkan pada class PengelolaanZakat sehingga class lain hanya berfokus pada penyimpanan data.
+    </p>
+</section>
+
+<section>
     <h2>Langkah Penyelesaian Masalah</h2>
 
     <ol>
@@ -400,31 +503,172 @@ Amil
 </section>
 
 <section>
-    <h2>Alur Sistem</h2>
+    <h2>CARA KERJA PROGRAM</h2>
 
-<pre>
-Muzakki
-   ↓
-Membayar Zakat
-   ↓
-Zakat
-   ↓
-Amil
-   ↓
-Mustahik
-</pre>
+    <ol>
+        <li>Program membuat object Muzakki.</li>
+        <li>Program membuat object Mustahik.</li>
+        <li>Program membuat object Zakat.</li>
+        <li>Program membuat object Amil.</li>
+        <li>Program membuat object PengelolaanZakat.</li>
+        <li>Sistem menampilkan data muzakki.</li>
+        <li>Sistem menampilkan data zakat.</li>
+        <li>Sistem melakukan distribusi zakat melalui amil.</li>
+        <li>Sistem menampilkan hasil distribusi zakat kepada mustahik.</li>
+    </ol>
 </section>
 
 <section>
     <h2>Cara Penggunaan Aplikasi</h2>
 
-    <ol>
+    <p>
         <li>Muzakki memasukkan data dan jumlah zakat.</li>
         <li>Sistem menyimpan data zakat.</li>
         <li>Amil mengelola zakat yang terkumpul.</li>
         <li>Mustahik menerima zakat.</li>
         <li>Sistem menampilkan hasil distribusi zakat.</li>
-    </ol>
+    </p>
+</section>
+
+<section>
+    <h2>CLASS DIAGRAM</h2>
+
+    <p>
+        Berikut merupakan class diagram dari Sistem Pengelolaan Zakat Masjid yang menunjukkan hubungan antar class dalam program.
+    </p>
+
+<pre><code>
+                 Orang
+            ┌─────────────┐
+            │ nama        │
+            │ alamat      │
+            └──────┬──────┘
+                   │
+      ┌────────────┴────────────┐
+      │                         │
+
+   Muzakki                  Mustahik
+┌─────────────┐        ┌─────────────┐
+│jumlahZakat  │        │kategori     │
+└─────────────┘        └─────────────┘
+
+
+         Zakat
+┌─────────────────┐
+│ jenisZakat      │
+│ jumlah          │
+└─────────────────┘
+
+
+          Amil
+┌─────────────────┐
+│ namaAmil        │
+└─────────────────┘
+
+
+   PengelolaanZakat
+┌─────────────────────┐
+│ tampilkanData()     │
+│ distribusiZakat()   │
+└─────────────────────┘
+</code></pre>
+
+    <p>
+        Class Orang merupakan parent class yang menjadi dasar bagi class Muzakki dan Mustahik melalui konsep inheritance. Class PengelolaanZakat digunakan untuk mengelola seluruh proses bisnis sistem, sedangkan class Zakat dan Amil digunakan untuk mendukung proses pengelolaan dan distribusi zakat.
+    </p>
+</section>
+
+<section>
+    <h2>DATA SIMULASI PROGRAM</h2>
+
+    <p>
+        Untuk menggambarkan kondisi nyata dalam pengelolaan zakat masjid, sistem menggunakan lebih dari 10 data muzakki sebagai contoh data pembayaran zakat.
+    </p>
+
+    <h3>Data Muzakki</h3>
+
+    <ul>
+        <li>Ahmad - Rp750.000</li>
+        <li>Budi - Rp500.000</li>
+        <li>Rudi - Rp600.000</li>
+        <li>Siti - Rp450.000</li>
+        <li>Aisyah - Rp700.000</li>
+        <li>Hasan - Rp550.000</li>
+        <li>Fatimah - Rp650.000</li>
+        <li>Rahman - Rp800.000</li>
+        <li>Abdullah - Rp900.000</li>
+        <li>Nabila - Rp500.000</li>
+    </ul>
+
+    <h3>Data Mustahik</h3>
+
+    <ul>
+        <li>Pak Ali - Fakir</li>
+        <li>Bu Aminah - Fakir</li>
+        <li>Pak Joko - Miskin</li>
+        <li>Bu Sarah - Miskin</li>
+        <li>Pak Usman - Fisabilillah</li>
+    </ul>
+
+    <p>
+        Data di atas digunakan sebagai simulasi untuk menunjukkan bagaimana sistem dapat mengelola banyak data muzakki dan mustahik dalam proses pengumpulan dan distribusi zakat.
+    </p>
+</section>
+
+<section>
+    <h2>FLOWCHART SISTEM PENGELOLAAN ZAKAT MASJID</h2>
+
+    <p>
+        Flowchart berikut menunjukkan alur proses pengelolaan zakat mulai dari pembayaran zakat oleh muzakki hingga proses distribusi zakat kepada mustahik.
+    </p>
+
+<pre><code>
+┌───────────┐
+│   MULAI   │
+└─────┬─────┘
+      │
+      ▼
+┌─────────────────────┐
+│ Input Data Muzakki  │
+└─────┬───────────────┘
+      │
+      ▼
+┌─────────────────────┐
+│ Input Data Zakat    │
+└─────┬───────────────┘
+      │
+      ▼
+┌─────────────────────┐
+│ Data Disimpan       │
+└─────┬───────────────┘
+      │
+      ▼
+┌─────────────────────┐
+│ Amil Mengelola      │
+│ Data Zakat          │
+└─────┬───────────────┘
+      │
+      ▼
+┌─────────────────────┐
+│ Distribusi Zakat    │
+│ kepada Mustahik     │
+└─────┬───────────────┘
+      │
+      ▼
+┌─────────────────────┐
+│ Tampilkan Hasil     │
+│ Distribusi Zakat    │
+└─────┬───────────────┘
+      │
+      ▼
+┌───────────┐
+│  SELESAI  │
+└───────────┘
+</code></pre>
+
+    <p>
+        Berdasarkan flowchart di atas, proses dimulai dengan memasukkan data muzakki dan data zakat. Setelah data tersimpan, amil melakukan pengelolaan dan pendistribusian zakat kepada mustahik yang berhak menerima. Selanjutnya sistem menampilkan hasil distribusi zakat dan proses berakhir.
+    </p>
 </section>
 
 <section>
@@ -438,133 +682,96 @@ Mustahik
     <div class="code-header">DART SOURCE CODE</div>
 <pre><code>
 
-
 // Nama   : Uliya Gumpari (251410008)
 // Nama   : Agis Lyoni Putri (251410022)
 // Kelas  : SI2A
 
-// ===================================================
-// CLASS ORANG
-// Class induk (parent class) yang menyimpan
-// data umum berupa nama dan alamat
-// ===================================================
+// =====================================
+// CLASS DATA
+// =====================================
+
 class Orang {
-
-  // Properti untuk menyimpan nama orang
   String nama;
-
-  // Properti untuk menyimpan alamat orang
   String alamat;
 
-  // Constructor untuk mengisi nilai nama dan alamat
   Orang(this.nama, this.alamat);
-
-  // Method untuk menampilkan informasi orang
-  void tampilkanInfo() {
-    print("Nama   : $nama");
-    print("Alamat : $alamat");
-  }
 }
 
-// ===================================================
-// CLASS MUZAKKI
-// Class turunan dari Orang yang digunakan
-// untuk menyimpan data pembayar zakat
-// ===================================================
 class Muzakki extends Orang {
-
-  // Properti jumlah zakat yang dibayarkan
   double jumlahZakat;
 
-  // Constructor
   Muzakki(
     String nama,
     String alamat,
     this.jumlahZakat,
   ) : super(nama, alamat);
-
-  // Method untuk proses pembayaran zakat
-  void bayarZakat() {
-    print("$nama telah membayar zakat sebesar Rp$jumlahZakat");
-  }
 }
 
-// ===================================================
-// CLASS MUSTAHIK
-// Class turunan dari Orang yang digunakan
-// untuk menyimpan data penerima zakat
-// ===================================================
 class Mustahik extends Orang {
-
-  // Properti kategori penerima zakat
   String kategori;
 
-  // Constructor
   Mustahik(
     String nama,
     String alamat,
     this.kategori,
   ) : super(nama, alamat);
-
-  // Method untuk menerima zakat
-  void terimaZakat(double jumlah) {
-    print("$nama menerima bantuan zakat sebesar Rp$jumlah");
-  }
 }
 
-// ===================================================
-// CLASS ZAKAT
-// Digunakan untuk menyimpan informasi zakat
-// ===================================================
 class Zakat {
-
-  // Properti jenis zakat
   String jenisZakat;
-
-  // Properti jumlah zakat
   double jumlah;
 
-  // Constructor
   Zakat(this.jenisZakat, this.jumlah);
-
-  // Method untuk menampilkan data zakat
-  void tampilkanInfo() {
-    print("Jenis Zakat : $jenisZakat");
-    print("Jumlah      : Rp$jumlah");
-  }
 }
 
-// ===================================================
-// CLASS AMIL
-// Digunakan untuk mengelola dan menyalurkan zakat
-// ===================================================
 class Amil {
-
-  // Properti nama amil
   String namaAmil;
 
-  // Constructor
   Amil(this.namaAmil);
+}
 
-  // Method untuk menyalurkan zakat kepada mustahik
+// =====================================
+// CLASS LOGIKA BISNIS
+// =====================================
+
+class PengelolaanZakat {
+
+  void tampilkanDataMuzakki(
+      Muzakki muzakki) {
+
+    print("Nama   : ${muzakki.nama}");
+    print("Alamat : ${muzakki.alamat}");
+    print("Jumlah Zakat : Rp${muzakki.jumlahZakat.toInt()}");
+  }
+
+  void tampilkanDataZakat(
+      Zakat zakat) {
+
+    print("Jenis Zakat : ${zakat.jenisZakat}");
+    print("Jumlah      : Rp${zakat.jumlah.toInt()}");
+  }
+
   void distribusiZakat(
+      Amil amil,
       Mustahik mustahik,
-      double jumlah) {
+      Zakat zakat) {
 
     print(
-      "$namaAmil menyalurkan zakat kepada ${mustahik.nama}");
+      "${amil.namaAmil} menyalurkan zakat kepada ${mustahik.nama}"
+    );
 
-    mustahik.terimaZakat(jumlah);
+    print(
+      "${mustahik.nama} menerima bantuan zakat sebesar Rp${zakat.jumlah.toInt()}"
+    );
   }
 }
 
-// ===================================================
+// =====================================
 // PROGRAM UTAMA
-// Menghubungkan seluruh class dalam satu sistem
-// ===================================================
+// =====================================
+
 void main() {
 
-  // Membuat objek Muzakki
   Muzakki muzakki =
       Muzakki(
         "Bapak H. Abdullah",
@@ -572,7 +779,6 @@ void main() {
         750000,
       );
 
-  // Membuat objek Mustahik
   Mustahik mustahik =
       Mustahik(
         "Ibu Siti Aminah",
@@ -580,38 +786,36 @@ void main() {
         "Fakir",
       );
 
-  // Membuat objek Zakat
   Zakat zakat =
       Zakat(
         "Zakat Fitrah",
         750000,
       );
 
-  // Membuat objek Amil
   Amil amil =
       Amil(
         "Uliya dan Agis",
       );
 
+  PengelolaanZakat sistem =
+      PengelolaanZakat();
+
   print("=== SISTEM PENGELOLAAN ZAKAT MASJID ===\n");
 
-  // Menampilkan data muzakki
   print("DATA MUZAKKI");
-  muzakki.tampilkanInfo();
-  muzakki.bayarZakat();
+  sistem.tampilkanDataMuzakki(
+      muzakki);
 
-  // Menampilkan data zakat
   print("\nDATA ZAKAT");
-  zakat.tampilkanInfo();
+  sistem.tampilkanDataZakat(
+      zakat);
 
-  // Menyalurkan zakat kepada mustahik
   print("\nDISTRIBUSI ZAKAT");
-  amil.distribusiZakat(
-    mustahik,
-    zakat.jumlah,
-  );
+  sistem.distribusiZakat(
+      amil,
+      mustahik,
+      zakat);
 }
-
 </code></pre>
 </div>
 <button onclick="openModal('https://dartpad.dev/?id=a070f773cfa53b06e42dac6d9916dfe8&run=true')">Run Program</button>
@@ -626,7 +830,7 @@ void main() {
 DATA MUZAKKI
 Nama   : Bapak H. Abdullah
 Alamat : Palembang
-Bapak H. Abdullah telah membayar zakat sebesar Rp750000
+Jumlah Zakat : Rp750000
 
 DATA ZAKAT
 Jenis Zakat : Zakat Fitrah
@@ -635,6 +839,7 @@ Jumlah      : Rp750000
 DISTRIBUSI ZAKAT
 Uliya dan Agis menyalurkan zakat kepada Ibu Siti Aminah
 Ibu Siti Aminah menerima bantuan zakat sebesar Rp750000
+
 </pre>
 </section>
 
