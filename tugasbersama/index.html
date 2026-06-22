@@ -518,52 +518,28 @@ Mustahik
     </p>
 </section>
 
-<section>
-    <h2>CLASS DIAGRAM</h2>
+<!-- CLASS DIAGRAM SECTION -->
+<section class="card">
+
+    <h1>CLASS DIAGRAM</h1>
 
     <p>
-        Berikut merupakan class diagram dari Sistem Pengelolaan Zakat Masjid yang menunjukkan hubungan antar class dalam program.
+        Class diagram ini menunjukkan struktur sistem pengelolaan zakat masjid
+        yang terdiri dari class Muzakki, Mustahik, Zakat, Amil, dan
+        Pengelolaan Zakat.
     </p>
 
-<pre><code>
-                 Orang
-            ┌─────────────┐
-            │ nama        │
-            │ alamat      │
-            └──────┬──────┘
-                   │
-      ┌────────────┴────────────┐
-      │                         │
 
-   Muzakki                  Mustahik
-┌─────────────┐        ┌─────────────┐
-│jumlahZakat  │        │kategori     │
-└─────────────┘        └─────────────┘
+    <div class="image-box">
+        <img src="classdiagram.jpeg" alt="Class Diagram Sistem Zakat">
+    </div>
 
-
-         Zakat
-┌─────────────────┐
-│ jenisZakat      │
-│ jumlah          │
-└─────────────────┘
-
-
-          Amil
-┌─────────────────┐
-│ namaAmil        │
-└─────────────────┘
-
-
-   PengelolaanZakat
-┌─────────────────────┐
-│ tampilkanData()     │
-│ distribusiZakat()   │
-└─────────────────────┘
-</code></pre>
 
     <p>
-        Class Orang merupakan parent class yang menjadi dasar bagi class Muzakki dan Mustahik melalui konsep inheritance. Class PengelolaanZakat digunakan untuk mengelola seluruh proses bisnis sistem, sedangkan class Zakat dan Amil digunakan untuk mendukung proses pengelolaan dan distribusi zakat.
+        Hubungan antar class menggambarkan proses pengelolaan data zakat
+        mulai dari pengumpulan sampai proses distribusi kepada mustahik.
     </p>
+
 </section>
 
 <section>
@@ -603,60 +579,46 @@ Mustahik
     </p>
 </section>
 
-<section>
-    <h2>FLOWCHART SISTEM PENGELOLAAN ZAKAT MASJID</h2>
+
+<!-- FLOWCHART SECTION -->
+<section class="card">
+
+    <h1>FLOWCHART SISTEM PENGELOLAAN ZAKAT MASJID</h1>
 
     <p>
-        Flowchart berikut menunjukkan alur proses pengelolaan zakat mulai dari pembayaran zakat oleh muzakki hingga proses distribusi zakat kepada mustahik.
+        Flowchart ini menggambarkan alur proses pengelolaan zakat mulai dari
+        input data muzakki, data zakat, proses pengelolaan oleh amil,
+        hingga distribusi zakat kepada mustahik.
     </p>
 
-<pre><code>
-┌───────────┐
-│   MULAI   │
-└─────┬─────┘
-      │
-      ▼
-┌─────────────────────┐
-│ Input Data Muzakki  │
-└─────┬───────────────┘
-      │
-      ▼
-┌─────────────────────┐
-│ Input Data Zakat    │
-└─────┬───────────────┘
-      │
-      ▼
-┌─────────────────────┐
-│ Data Disimpan       │
-└─────┬───────────────┘
-      │
-      ▼
-┌─────────────────────┐
-│ Amil Mengelola      │
-│ Data Zakat          │
-└─────┬───────────────┘
-      │
-      ▼
-┌─────────────────────┐
-│ Distribusi Zakat    │
-│ kepada Mustahik     │
-└─────┬───────────────┘
-      │
-      ▼
-┌─────────────────────┐
-│ Tampilkan Hasil     │
-│ Distribusi Zakat    │
-└─────┬───────────────┘
-      │
-      ▼
-┌───────────┐
-│  SELESAI  │
-└───────────┘
-</code></pre>
+    <div class="image-box">
+        <img src="flowchart.jpeg" alt="Flowchart Sistem Zakat">
+    </div>
 
-    <p>
-        Berdasarkan flowchart di atas, proses dimulai dengan memasukkan data muzakki dan data zakat. Setelah data tersimpan, amil melakukan pengelolaan dan pendistribusian zakat kepada mustahik yang berhak menerima. Selanjutnya sistem menampilkan hasil distribusi zakat dan proses berakhir.
-    </p>
+
+    <h2>Kode Semu</h2>
+
+    <pre>
+Mulai
+
+Input Data Muzakki
+
+Input Data Zakat
+
+Simpan Data Zakat
+
+Amil mengelola data zakat
+
+Jika data valid
+    Distribusi zakat kepada Mustahik
+Jika tidak
+    Perbaiki data
+
+Tampilkan hasil distribusi zakat
+
+Selesai
+    </pre>
+
 </section>
 
 <section>
