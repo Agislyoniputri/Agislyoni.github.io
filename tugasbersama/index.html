@@ -678,6 +678,11 @@ class Amil {
   String namaAmil;
 
   Amil(this.namaAmil);
+
+  void tampilkanInfo() {
+    print("Nama Amil : $namaAmil");
+    print("Tugas     : Mengelola dan mendistribusikan zakat");
+  }
 }
 
 // =====================================
@@ -760,12 +765,16 @@ void main() {
   sistem.tampilkanDataZakat(
       zakat);
 
+  print("\nDATA AMIL");
+  amil.tampilkanInfo();
+
   print("\nDISTRIBUSI ZAKAT");
   sistem.distribusiZakat(
       amil,
       mustahik,
       zakat);
 }
+  
 </code></pre>
 </div>
 <button onclick="openModal('https://dartpad.dev/?id=a070f773cfa53b06e42dac6d9916dfe8&run=true')">Run Program</button>
@@ -785,6 +794,10 @@ Jumlah Zakat : Rp750000
 DATA ZAKAT
 Jenis Zakat : Zakat Fitrah
 Jumlah      : Rp750000
+
+DATA AMIL
+Nama Amil : Uliya dan Agis
+Tugas     : Mengelola dan mendistribusikan zakat
 
 DISTRIBUSI ZAKAT
 Uliya dan Agis menyalurkan zakat kepada Ibu Siti Aminah
